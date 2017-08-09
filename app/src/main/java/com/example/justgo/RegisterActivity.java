@@ -22,10 +22,10 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        final EditText nomeEditText = (EditText) findViewById(R.id.nomeRegister);
-        final EditText emailEditText = (EditText) findViewById(R.id.emailRegister);
-        final EditText senhaEditText = (EditText) findViewById(R.id.senhaRegister);
-        final Button bRegister = (Button) findViewById(R.id.email_sign_in_button);
+       final EditText nomeEditText = (EditText) findViewById(R.id.nomeCadastro);
+        final EditText emailEditText = (EditText) findViewById(R.id.emailCadastro);
+        final EditText senhaEditText = (EditText) findViewById(R.id.senhaCadastro);
+        final Button bRegister = (Button) findViewById(R.id.botaoCadastrar);
 
         bRegister.setOnClickListener(new View.OnClickListener() {
             @Override

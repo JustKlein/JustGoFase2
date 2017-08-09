@@ -25,51 +25,50 @@ public class LoginActivity extends AppCompatActivity {
 
         final EditText emailEditText = (EditText) findViewById(R.id.emailLogin);
         final EditText senhaEditText = (EditText) findViewById(R.id.senhaLogin);
-        final Button bLogin = (Button) findViewById(R.id.email_sign_in_buttonLogin);
-
+        final Button bLogin = (Button) findViewById(R.id.botaoEntrarLogin);
+        final VerificaçãodeDados verificar = new VerificaçãodeDados();
         bLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final String email= emailEditText.getText().toString();
+                final String email = emailEditText.getText().toString();
                 final String senha = senhaEditText.getText().toString();
-
-                // Response received from the server
-                Response.Listener<String> responseListener = new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        try {
-                            JSONObject jsonResponse = new JSONObject(response);
-                            boolean success = jsonResponse.getBoolean("success");
-
-                            if (success) {
-                                String email = jsonResponse.getString("emailResposta");
-                                String senha = jsonResponse.getString("senhaResposta");
-                                Log.v("Email",email);
-                                Log.v("Senha",senha);
-                                if(email.contentEquals(email) && senha.contentEquals(senha)) {
+              //  if (verificar.verificarLogin(email, senha) == false) {
+                    Response.Listener<String> responseListener = new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            try {
+                                JSONObject jsonResponse = new JSONObject(response);
+                                boolean success = jsonResponse.getBoolean("success");
+                                if (success) {
+                                    String email = jsonResponse.getString("emailResposta");
+                                    String senha = jsonResponse.getString("senhaResposta");
+                                    Log.v("Email", email);
+                                    Log.v("Senha", senha);
+                                    if (email.contentEquals(email) && senha.contentEquals(senha)) {
+                                        AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
+                                        builder.setMessage("Logado")
+                                                .setNegativeButton("TentarNovamente", null)
+                                                .create()
+                                                .show();
+                                    }
+                                } else {
                                     AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
-                                    builder.setMessage("Logado")
-                                            .setNegativeButton("TentarNovamente", null)
+                                    builder.setMessage("Não foi possível efetuar o Login")
+                                            .setNegativeButton("Tentar Novamente", null)
                                             .create()
                                             .show();
                                 }
-                            } else {
-                                AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
-                                builder.setMessage("Não foi possível efetuar o Login")
-                                        .setNegativeButton("Tentar Novamente", null)
-                                        .create()
-                                        .show();
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
                             }
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
                         }
-                    }
-                };
+                    };
 
-                LoginRequest loginRequest = new LoginRequest(email, senha, responseListener);
-                RequestQueue queue = Volley.newRequestQueue(LoginActivity.this);
-                queue.add(loginRequest);
+                    LoginRequest loginRequest = new LoginRequest(email, senha, responseListener);
+                    RequestQueue queue = Volley.newRequestQueue(LoginActivity.this);
+                    queue.add(loginRequest);
+                //}
             }
         });
     }

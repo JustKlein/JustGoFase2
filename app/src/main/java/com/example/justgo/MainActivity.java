@@ -12,11 +12,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
     }
-    public void onClickButtonLoginMain(View v){
+    public void onClickfazerLoginMainActivity(View v){
         Intent intent = new Intent(MainActivity.this, LoginActivity.class);
         MainActivity.this.startActivity(intent);
     }
-    public void onClickButtonCadastroMain(View v){
+    public void onClickfazerCadastroEmailMainActivity(View v){
         Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
         MainActivity.this.startActivity(intent);
     }
