@@ -2,6 +2,7 @@ package com.example.justgo;
 
 
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -50,6 +51,8 @@ public class LoginActivity extends AppCompatActivity {
                                                 .setNegativeButton("TentarNovamente", null)
                                                 .create()
                                                 .show();
+                                        Intent home = new Intent(LoginActivity.this,Home.class);
+                                        startActivity(home);
                                     }
                                 } else {
                                     AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
