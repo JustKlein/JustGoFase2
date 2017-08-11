@@ -34,45 +34,48 @@ public class LoginActivity extends AppCompatActivity {
                 final String email = emailEditText.getText().toString();
                 final String senha = senhaEditText.getText().toString();
               //  if (verificar.verificarLogin(email, senha) == false) {
-                    Response.Listener<String> responseListener = new Response.Listener<String>() {
-                        @Override
-                        public void onResponse(String response) {
-                            try {
-                                JSONObject jsonResponse = new JSONObject(response);
-                                boolean success = jsonResponse.getBoolean("success");
-                                if (success) {
-                                    String email = jsonResponse.getString("emailResposta");
-                                    String senha = jsonResponse.getString("senhaResposta");
-                                    Log.v("Email", email);
-                                    Log.v("Senha", senha);
-                                    if (email.contentEquals(email) && senha.contentEquals(senha)) {
-                                        AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
-                                        builder.setMessage("Logado")
-                                                .setNegativeButton("TentarNovamente", null)
-                                                .create()
-                                                .show();
-                                        Intent home = new Intent(LoginActivity.this,Home.class);
-                                        startActivity(home);
-                                    }
-                                } else {
-                                    AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
-                                    builder.setMessage("Não foi possível efetuar o Login")
-                                            .setNegativeButton("Tentar Novamente", null)
-                                            .create()
-                                            .show();
-                                }
-
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    };
-
-                    LoginRequest loginRequest = new LoginRequest(email, senha, responseListener);
-                    RequestQueue queue = Volley.newRequestQueue(LoginActivity.this);
-                    queue.add(loginRequest);
+                    BD(email,senha);
                 //}
             }
         });
+    }
+    public void BD(String email, String senha){
+        Response.Listener<String> responseListener = new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonResponse = new JSONObject(response);
+                    boolean success = jsonResponse.getBoolean("success");
+                    if (success) {
+                        String email = jsonResponse.getString("emailResposta");
+                        String senha = jsonResponse.getString("senhaResposta");
+                        Log.v("Email", email);
+                        Log.v("Senha", senha);
+                        if (email.contentEquals(email) && senha.contentEquals(senha)) {
+                            AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
+                            builder.setMessage("Logado")
+                                    .setNegativeButton("TentarNovamente", null)
+                                    .create()
+                                    .show();
+                            Intent home = new Intent(LoginActivity.this,Home.class);
+                            startActivity(home);
+                        }
+                    } else {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
+                        builder.setMessage("Não foi possível efetuar o Login")
+                                .setNegativeButton("Tentar Novamente", null)
+                                .create()
+                                .show();
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+
+        LoginRequest loginRequest = new LoginRequest(email, senha, responseListener);
+        RequestQueue queue = Volley.newRequestQueue(LoginActivity.this);
+        queue.add(loginRequest);
     }
 }

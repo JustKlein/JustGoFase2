@@ -5,6 +5,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
+import com.example.justgo.Mapa.AddressLocationActivity;
+import com.example.justgo.Mapa.HomePageMaps;
+
 public class Home extends AppCompatActivity {
 
     @Override

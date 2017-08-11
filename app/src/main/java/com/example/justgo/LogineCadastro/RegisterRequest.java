@@ -7,6 +7,7 @@ package com.example.justgo.LogineCadastro;
         import java.util.HashMap;
         import java.util.Map;
 
+
 public class RegisterRequest extends StringRequest {
     private static final String REGISTER_REQUEST_URL = "http://justgodb.000webhostapp.com/register.php";
     private Map<String, String> params;

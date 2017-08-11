@@ -1,5 +1,6 @@
-package com.example.justgo;
+package com.example.justgo.Mapa;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
@@ -12,12 +13,16 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.toolbox.Volley;
+import com.example.justgo.R;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
 
-import com.example.justgo.MessageEB;
-import com.example.justgo.LocationIntentService;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import de.greenrobot.event.EventBus;
 
@@ -37,14 +42,15 @@ public class AddressLocationActivity extends ActionBarActivity
     private TextView tvAddressLocation;
     private Button btNameToCoord;
     private Button btCoordToName;
+    private double a;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_address_location);
 
+        //EventBus.getDefault().register(this);
         EventBus.getDefault().register(this);
-
         etAddress = (EditText) findViewById(R.id.et_address);
         tvAddressLocation = (TextView) findViewById(R.id.tv_address_location);
         btNameToCoord = (Button) findViewById(R.id.bt_name_to_coord);
@@ -93,7 +99,7 @@ public class AddressLocationActivity extends ActionBarActivity
                 .FusedLocationApi
                 .getLastLocation(mGoogleApiClient);
 
-        if(l != null){
+        if (l != null) {
             mLastLocation = l;
             btNameToCoord.setEnabled(true);
             btCoordToName.setEnabled(true);
@@ -110,28 +116,60 @@ public class AddressLocationActivity extends ActionBarActivity
         Log.i("LOG", "AddressLocationActivity.onConnectionFailed(" + connectionResult + ")");
     }
 
-    public void getLocationListener(View view){
+    public void getLocationListener(View view) {
         int type;
         String address = null;
 
-        if(view.getId() == R.id.bt_name_to_coord){
+        if (view.getId() == R.id.bt_name_to_coord) {
             type = 1;
             address = etAddress.getText().toString();
-        }
-        else{
+        } else {
             type = 2;
         }
 
         callIntentService(1, address);
     }
 
-    public void onEvent(final MessageEB m){
-        runOnUiThread(new Runnable(){
+    public void onEvent(final MessageEB m) {
+        runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                Log.i("aaaaaaaaaaaaaaaaaaa", m.getResultMessage());
-                tvAddressLocation.setText("Data: "+m.getResultMessage());
+                //
+                // Log.i("aaaaaaaaaaaaaaaaaaa", Double.toString(m.getResultLatitude()));
+                tvAddressLocation.setText("Data: " + m.getResultLatitude() + m.getResultLongitude());
+                BD(m.getResultLatitude(), m.getResultLongitude());
             }
         });
+    }
+
+    public void BD(Double latitude, Double longitude) {
+        Response.Listener<String> responseListener = new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonResponse = new JSONObject(response);
+                    boolean success = jsonResponse.getBoolean("success");
+                    if (success) {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(AddressLocationActivity.this);
+                        builder.setMessage("Usuário cadastrado com sucesso")
+                                .setNegativeButton("Ok", null)
+                                .create()
+                                .show();
+                    } else {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(AddressLocationActivity.this);
+                        builder.setMessage("Erro ao cadastrar usuário")
+                                .setNegativeButton("Tentar novamente", null)
+                                .create()
+                                .show();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+
+        PontoRequest pontoRequest = new PontoRequest(latitude,longitude, responseListener);
+        RequestQueue queue = Volley.newRequestQueue(AddressLocationActivity.this);
+        queue.add(pontoRequest);
     }
 }
