@@ -57,7 +57,7 @@ public class LoginActivity extends AppCompatActivity {
                                     .setNegativeButton("TentarNovamente", null)
                                     .create()
                                     .show();
-                            Intent home = new Intent(LoginActivity.this,Home.class);
+                            Intent home = new Intent(LoginActivity.this,Navegacao.class);
                             startActivity(home);
                         }
                     } else {

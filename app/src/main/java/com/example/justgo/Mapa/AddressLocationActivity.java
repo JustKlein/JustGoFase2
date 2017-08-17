@@ -44,6 +44,7 @@ public class AddressLocationActivity extends ActionBarActivity
     private Button btCoordToName;
     private double a;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_experiencia"
+            android:icon="@drawable/ic_menu_exp"
+            android:title="@string/experiencias" />
+
+        <item
+            android:id="@+id/nav_pesquisar"
+            android:icon="@drawable/ic_menu_pesquisa"
+            android:title="@string/pesquisar"/>
+
+        <item
+            android:id="@+id/nav_sugestoes"
+            android:icon="@drawable/ic_menu_sugestao"
+            android:title="@string/sugestoes"
+            />
+
+        <item
+            android:id="@+id/nav_config"
+            android:icon="@drawable/ic_menu_config"
+            android:title="@string/configuracoes" />
+
+        <item
+            android:id="@+id/nav_sair"
+            android:icon="@drawable/ic_sair"
+            android:title="@string/sair" />
+    </group>
+
+</menu>

@@ -9,6 +9,8 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.util.Log;
 
+import com.example.justgo.eudesisto;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +23,7 @@ import de.greenrobot.event.EventBus;
  */
 public class LocationIntentService extends IntentService {
 
-
+public eudesisto e;
     public LocationIntentService() {
         super("worker_thread");
         Log.v("ENTROU", "ENTROUNOCONSTUTOR");
@@ -29,8 +31,6 @@ public class LocationIntentService extends IntentService {
 
     @Override
     protected void onHandleIntent(Intent intent) {
-        Location location = intent.getParcelableExtra(AddressLocationActivity.LOCATION);
-        int type = intent.getIntExtra(AddressLocationActivity.TYPE, 1);
         String address = intent.getStringExtra(AddressLocationActivity.ADDRESS);
         Log.v("ENTROU", "ENTROUNESSE TREM AQUI");
         List<Address> list = new ArrayList<Address>();
@@ -39,13 +39,9 @@ public class LocationIntentService extends IntentService {
         String resultAddress = "";
 
         String resultAddress2 = "";
-        try {
-            if (type == 2 || address == null) {
-                list = (ArrayList<Address>) geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
 
-            } else {
-                list = (ArrayList<Address>) geocoder.getFromLocationName(address, 1);
-            }
+        try {
+            list = (ArrayList<Address>) geocoder.getFromLocationName(address, 1);
         } catch (IOException e) {
             e.printStackTrace();
             error = "Network problem";
@@ -61,10 +57,11 @@ public class LocationIntentService extends IntentService {
             resultAddress2 += a.getLongitude();
         } else {
             resultAddress = error;
-          //  resultAddress2 = 0.0;
         }
 
         if (resultAddress != error ) {
+            e.setLatitude(Double.parseDouble(resultAddress));
+
             Log.v("FOI","FOI");
             MessageEB m = new MessageEB();
             m.setResultLatitude(Double.parseDouble(resultAddress));

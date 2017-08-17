@@ -32,10 +32,10 @@
         </activity>
         <activity android:name=".RegisterActivity" />
         <activity android:name=".LoginActivity" />
-        <activity android:name=".Home" />
+
         <service
             android:name=".Mapa.LocationIntentService"
-            android:exported="false"/>
+            android:exported="false" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -48,11 +48,16 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-
         <activity
             android:name=".Mapa.HomePageMaps"
-            android:label="@string/title_activity_home_page_maps" />
-        <activity android:name=".Mapa.AddressLocationActivity"></activity>
+            android:label="@string/app_name" />
+        <activity android:name=".Mapa.AddressLocationActivity" />
+        <activity android:name=".CriarRota" />
+        <activity
+            android:name=".Navegacao"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".Configuracoes"></activity>
     </application>
 
 </manifest>
