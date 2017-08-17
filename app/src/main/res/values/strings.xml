@@ -55,6 +55,7 @@
     <string name="entrarLogin"> Entrar </string>
     <string name="cadastre"> Cadastre-se </string>
     <string name="nome"> Nome </string>
+    <string name="title_activity_origem_destino_maps">Map</string>
 
 </resources>
 

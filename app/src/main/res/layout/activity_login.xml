@@ -25,14 +25,16 @@
             android:layout_width="350dp"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:hint="@string/email" />
+            android:hint="@string/email"
+            android:inputType="text"/>
 
         <EditText
             android:id="@+id/senhaLogin"
             android:layout_width="350dp"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:hint="@string/senha" />
+            android:hint="@string/senha"
+            android:inputType="textPassword"/>
 
         <Button
             android:onClick="entrarLogin"

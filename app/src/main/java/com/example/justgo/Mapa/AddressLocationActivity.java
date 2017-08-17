@@ -1,4 +1,4 @@
-package com.example.justgo.Mapa;
+/*package com.example.justgo.Mapa;
 
 import android.app.AlertDialog;
 import android.content.Intent;
@@ -174,3 +174,4 @@ public class AddressLocationActivity extends ActionBarActivity
         queue.add(pontoRequest);
     }
 }
+*/

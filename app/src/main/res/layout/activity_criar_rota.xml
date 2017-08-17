@@ -7,13 +7,14 @@
     tools:context="com.example.justgo.CriarRota">
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:hint="Origem"
-            android:id="@+id/origem"/>
+            android:id="@+id/origem" />
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -23,14 +24,14 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="pesquisar"
-            android:onClick="pesquisarOrigem"
+            android:hint="Vizualizar"
+            android:onClick="BuscarOrigemDestino"
         />
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="pesquisar"
-            android:onClick="pesquisarDestino"
+            android:hint="Confirmar"
+            android:onClick="ConfirmarOrigemDestino"
             />
 
     </LinearLayout>

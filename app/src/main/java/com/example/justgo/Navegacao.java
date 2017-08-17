@@ -85,7 +85,10 @@ public class Navegacao extends AppCompatActivity
             // abrir as sugestões
         } else if (id == R.id.nav_config) {
             //abrir as configuracoes
-            setContentView(R.layout.activity_configuracoes);
+           Intent config =  new Intent (this, Configuracoes.class);
+            startActivity(config);
+
+            //setContentView(R.layout.activity_configuracoes);
             return true;
         } else if (id == R.id.nav_sair) {
             // deslogar
