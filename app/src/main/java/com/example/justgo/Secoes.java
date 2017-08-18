@@ -12,8 +12,9 @@ import java.util.List;
  */
 
 public class Secoes extends FragmentPagerAdapter {
-private final List<Fragment> listaDeFragmentos = new ArrayList<>();
-private final List<String>  listaDeTitulos = new ArrayList<>();
+
+    private final List<Fragment> listaDeFragmentos = new ArrayList<>();
+    private final List<String>  listaDeTitulos = new ArrayList<>();
 
     public void adicionaFragmento(Fragment fragmento, String titulo)
     {
@@ -26,8 +27,10 @@ private final List<String>  listaDeTitulos = new ArrayList<>();
         super(fm);
     }
 
-    public CharSequence getTituloPagina(int posicao)
+    @Override
+    public CharSequence getPageTitle(int posicao)
     {
+
         return listaDeTitulos.get(posicao);
     }
 

@@ -1,11 +1,13 @@
 package com.example.justgo;
 
 import android.support.design.widget.TabLayout;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v4.view.ViewPager;
 import android.os.Bundle;
-
+import android.util.Log;
 public class Experiencias extends AppCompatActivity {
+
+    private static final String TAG = "Experencias";
 
     private Secoes secoes;
 
@@ -15,6 +17,7 @@ public class Experiencias extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_experiencias);
+        Log.d(TAG,"onCreate: Starting");
 
         secoes = new Secoes(getSupportFragmentManager());
 
