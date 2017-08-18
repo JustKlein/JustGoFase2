@@ -79,6 +79,8 @@ public class Navegacao extends AppCompatActivity
 
         if (id == R.id.nav_experiencia) {
             // abrir experiencias
+            Intent exp =  new Intent (this, Experiencias.class);
+            startActivity(exp);
         } else if (id == R.id.nav_pesquisar) {
             // abrir activity para pesquisa
         } else if (id == R.id.nav_sugestoes) {

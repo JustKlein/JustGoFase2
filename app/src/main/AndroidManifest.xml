@@ -48,7 +48,6 @@
         <activity
             android:name=".Mapa.HomePageMaps"
             android:label="@string/app_name" />
-        <activity android:name=".Mapa.AddressLocationActivity" />
         <activity android:name=".CriarRota" />
         <activity
             android:name=".Navegacao"
@@ -58,7 +57,11 @@
         <activity
             android:name=".Mapa.OrigemDestinoMaps"
             android:label="@string/title_activity_origem_destino_maps" />
-        <activity android:name=".AdicionarPontosaRota"></activity>
+        <activity android:name=".AdicionarPontosaRota" />
+        <activity
+            android:name=".Experiencias"
+            android:label="@string/title_activity_experiencias"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

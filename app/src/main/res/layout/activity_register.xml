@@ -30,7 +30,8 @@
                 android:layout_width="350dp"
                 android:layout_height="wrap_content"
                 android:hint="@string/nome"
-                android:paddingLeft="3dp" />
+                android:paddingLeft="3dp"
+                android:inputType="text"/>
 
             <EditText
                 android:id="@+id/emailCadastro"
@@ -38,6 +39,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:hint="@string/email"
+                android:inputType="textEmailAddress"
                 android:paddingLeft="3dp" />
 
             <EditText
@@ -46,13 +48,15 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:hint="@string/senha"
-                android:paddingLeft="3dp" />
+                android:paddingLeft="3dp"
+                android:inputType="textPassword"/>
 
             <EditText
                 android:id="@+id/ConfirmarSenhaCadastro"
                 android:layout_width="350dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
+                android:inputType="textPassword"
                 android:hint="@string/confirmarSenha"
                 android:paddingLeft="3dp" />
 
