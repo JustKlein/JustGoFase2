@@ -106,7 +106,7 @@ public class Navegacao extends AppCompatActivity
         startActivity(homepage);
     }
     public void onClickAddRota(View v){
-        Intent Address =  new Intent(this, CriarRota.class);
+        Intent Address =  new Intent(this, NovaRota.class);
         startActivity(Address);
     }
     public void onClickNavegacao(View v){
