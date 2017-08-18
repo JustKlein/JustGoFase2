@@ -56,8 +56,12 @@
     <string name="cadastre"> Cadastre-se </string>
     <string name="nome"> Nome </string>
     <string name="title_activity_origem_destino_maps">Map</string>
+<<<<<<< HEAD
     <string name="title_activity_experiencias">Experiencias</string>
     <string name="section_format">Hello World from section: %1$d</string>
+=======
+    <string name="title_activity_nova_rota">Map</string>
+>>>>>>> 2f131ed3896bb488a25f31f8d4ddc3b4d25b0c6f
 
 </resources>
 
