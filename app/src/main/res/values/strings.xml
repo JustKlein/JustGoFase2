@@ -56,6 +56,7 @@
     <string name="cadastre"> Cadastre-se </string>
     <string name="nome"> Nome </string>
     <string name="title_activity_origem_destino_maps">Map</string>
+    <string name="title_activity_nova_rota">Map</string>
 
 </resources>
 

@@ -56,9 +56,8 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Configuracoes" />
         <activity
-            android:name=".Mapa.OrigemDestinoMaps"
-            android:label="@string/title_activity_origem_destino_maps" />
-        <activity android:name=".AdicionarPontosaRota"></activity>
+            android:name=".NovaRota"
+            android:label="@string/title_activity_nova_rota"></activity>
     </application>
 
 </manifest>
