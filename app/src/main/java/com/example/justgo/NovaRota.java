@@ -1,12 +1,14 @@
 package com.example.justgo;
 
+import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
-import com.example.justgo.Mapa.OrigemDestinoAux;
+import com.example.justgo.Mapa.Conversor;
+import com.example.justgo.Mapa.RotaAux;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -24,8 +26,9 @@ public class NovaRota extends FragmentActivity implements OnMapReadyCallback {
     private Conversor c;
     private Double[] arrayOrigem;
     private Double[] arrayDestino;
-    public static OrigemDestinoAux origemDestino;
+    public static RotaAux origemDestino;
     PolylineOptions rectOptions;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,12 +39,38 @@ public class NovaRota extends FragmentActivity implements OnMapReadyCallback {
         mapFragment.getMapAsync(this);
         origem = (EditText) findViewById(R.id.origem);
         destino = (EditText) findViewById(R.id.destino);
+
         c = new Conversor(getApplicationContext());
         arrayOrigem = new Double[2];
         arrayDestino = new Double[2];
         rectOptions = new PolylineOptions();
+
     }
+
     public void BuscarOrigemDestino(View v) {
+        if (origem != null && destino != null) {
+            String addressOrigem = origem.getText().toString();
+            String addressDestino = destino.getText().toString();
+            arrayOrigem = c.addressToLatLng(addressOrigem);
+            Log.v("LATITUDE", arrayOrigem[0].toString());
+            Log.v("LONGITUDE", arrayOrigem[1].toString());
+            arrayDestino = c.addressToLatLng(addressDestino);
+            Log.v("LATITUDE", arrayDestino[0].toString());
+            Log.v("LONGITUDE", arrayDestino[1].toString());
+            // Add a marker in Sydney and move the camera
+            LatLng sydney = new LatLng(arrayOrigem[0], arrayOrigem[1]);
+            mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
+            rectOptions.add(sydney);
+            sydney = new LatLng(arrayDestino[0], arrayDestino[1]);
+            rectOptions.add(sydney);
+            mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
+
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+            Polyline polyline = mMap.addPolyline(rectOptions);
+        }
+    }
+    public void ConfirmarOrigemDestino(View v){
+        if(arrayDestino != null && arrayOrigem!=null){
         String addressOrigem = origem.getText().toString();
         String addressDestino = destino.getText().toString();
         arrayOrigem = c.addressToLatLng(addressOrigem);
@@ -50,18 +79,18 @@ public class NovaRota extends FragmentActivity implements OnMapReadyCallback {
         arrayDestino = c.addressToLatLng(addressDestino);
         Log.v("LATITUDE",arrayDestino[0].toString());
         Log.v("LONGITUDE",arrayDestino[1].toString());
-        // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(arrayOrigem[0], arrayOrigem[1]);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        rectOptions.add(sydney);
-         sydney = new LatLng(arrayDestino[0], arrayDestino[1]);
-        rectOptions.add(sydney);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
 
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
-        Polyline polyline = mMap.addPolyline(rectOptions);
+
+            origemDestino = new RotaAux();
+            origemDestino.setOrigemLat(arrayOrigem[0]);
+            origemDestino.setOrigemLng(arrayOrigem[1]);
+            origemDestino.setDestinoLat(arrayDestino[0]);
+            origemDestino.setDestinoLng(arrayDestino[1]);
+            Intent intent = new Intent(this,AdicionarPontos.class);
+            startActivity(intent);
+        }
+
     }
-
     /**
      * Manipulates the map once available.
      * This callback is triggered when the map is ready to be used.

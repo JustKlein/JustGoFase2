@@ -1,4 +1,4 @@
-package com.example.justgo;
+package com.example.justgo.LogineCadastro;
 
 import android.widget.EditText;
 

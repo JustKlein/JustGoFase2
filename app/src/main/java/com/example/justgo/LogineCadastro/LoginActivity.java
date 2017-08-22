@@ -1,4 +1,4 @@
-package com.example.justgo;
+package com.example.justgo.LogineCadastro;
 
 
 import android.app.AlertDialog;
@@ -13,7 +13,8 @@ import android.widget.EditText;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
-import com.example.justgo.LogineCadastro.LoginRequest;
+import com.example.justgo.Navegacao;
+import com.example.justgo.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;

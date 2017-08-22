@@ -1,18 +1,43 @@
 package com.example.justgo.Mapa;
 
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.Polyline;
+
+import java.util.List;
+
 /**
  * Created by Larys on 17/08/2017.
  */
 
-public class OrigemDestinoAux {
+public class RotaAux {
     public static Double origemLat,origemLng,destinoLat,destinoLng;
+    private static List<Polyline> list;
+    private static List<Marker> markers;
+
+    public List<Polyline> getList() {
+        return list;
+    }
+
+    public void setList(List<Polyline> list) {
+        this.list = list;
+    }
+
+    public List<Marker> getMarkers() {
+        return markers;
+    }
+
+    public void setMarkers(List<Marker> markers) {
+        this.markers = markers;
+    }
+
+
 
     public static Double getDestinoLng() {
         return destinoLng;
     }
 
     public static void setDestinoLng(Double destinoLng) {
-        OrigemDestinoAux.destinoLng = destinoLng;
+        RotaAux.destinoLng = destinoLng;
     }
 
     public static Double getOrigemLng() {
@@ -20,7 +45,7 @@ public class OrigemDestinoAux {
     }
 
     public static void setOrigemLng(Double origemLng) {
-        OrigemDestinoAux.origemLng = origemLng;
+        RotaAux.origemLng = origemLng;
     }
 
     public static Double getDestinoLat() {
@@ -28,7 +53,7 @@ public class OrigemDestinoAux {
     }
 
     public static void setDestinoLat(Double destinoLat) {
-        OrigemDestinoAux.destinoLat = destinoLat;
+        RotaAux.destinoLat = destinoLat;
     }
 
     public static Double getOrigemLat() {
@@ -36,6 +61,6 @@ public class OrigemDestinoAux {
     }
 
     public static void setOrigemLat(Double origemLat) {
-        OrigemDestinoAux.origemLat = origemLat;
+        RotaAux.origemLat = origemLat;
     }
 }

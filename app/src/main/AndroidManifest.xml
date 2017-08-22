@@ -30,8 +30,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".RegisterActivity" />
-        <activity android:name=".LoginActivity" />
+        <activity android:name=".LogineCadastro.RegisterActivity" />
+        <activity android:name=".LogineCadastro.LoginActivity" />
 
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
@@ -56,9 +56,14 @@
         <activity
             android:name=".Experiencias"
             android:label="@string/title_activity_experiencias"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-           <activity android:name=".NovaRota"
-            android:label="@string/title_activity_nova_rota"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".NovaRota"
+            android:label="@string/title_activity_nova_rota" />
+        <activity
+            android:name=".AdicionarPontos"
+            android:label="@string/title_activity_adicionar_pontos" />
+        <activity android:name=".FinalizarCadastroRota"></activity>
     </application>
 
 </manifest>

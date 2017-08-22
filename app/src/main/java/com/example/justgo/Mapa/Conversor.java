@@ -1,4 +1,4 @@
-package com.example.justgo;
+package com.example.justgo.Mapa;
 
 import android.content.Context;
 import android.location.Address;
@@ -49,7 +49,7 @@ public class Conversor {
         }
         array[0] = Double.parseDouble(resultAddress);
         array[1] = Double.parseDouble(resultAddress2);
-
+Log.v("askjaskls",resultAddress);
         return array;
     }
 }
