@@ -1,7 +1,7 @@
-package com.example.justgo.Mapa;
+package com.example.justgo.CadastroRota;
 
+import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
-import com.google.android.gms.maps.model.Polyline;
 
 import java.util.List;
 
@@ -11,16 +11,27 @@ import java.util.List;
 
 public class RotaAux {
     public static Double origemLat,origemLng,destinoLat,destinoLng;
-    private static List<Polyline> list;
+    private static List<LatLng> pontos;
+    private static int codRota;
+
+    public static int getCodRota() {
+        return codRota;
+    }
+
+    public static void setCodRota(int codRota) {
+        RotaAux.codRota = codRota;
+    }
+
+    public static List<LatLng> getPontos() {
+        return pontos;
+    }
+
+    public static void setPontos(List<LatLng> pontos) {
+        RotaAux.pontos = pontos;
+    }
+
     private static List<Marker> markers;
 
-    public List<Polyline> getList() {
-        return list;
-    }
-
-    public void setList(List<Polyline> list) {
-        this.list = list;
-    }
 
     public List<Marker> getMarkers() {
         return markers;

@@ -7,10 +7,10 @@ package com.example.justgo.LogineCadastro;
 public class UsuarioLogado {
     public static String usuariocod;
 
-    public void setUsuario(String email){
+    public static void setUsuario(String email){
         usuariocod = email;
     }
-    public String getUsuario(){
+    public static String getUsuario(){
         return usuariocod;
     }
 }

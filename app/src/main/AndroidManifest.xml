@@ -49,21 +49,22 @@
             android:name=".Mapa.HomePageMaps"
             android:label="@string/app_name" />
         <activity
-            android:name=".Navegacao"
+            android:name=".Drawer.Navegacao"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Configuracoes" />
+        <activity android:name=".Drawer.Configuracoes" />
         <activity
-            android:name=".Experiencias"
+            android:name=".Drawer.Experiencias"
             android:label="@string/title_activity_experiencias"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".NovaRota"
+            android:name=".CadastroRota.NovaRota"
             android:label="@string/title_activity_nova_rota" />
         <activity
-            android:name=".AdicionarPontos"
+            android:name=".CadastroRota.AdicionarPontos"
             android:label="@string/title_activity_adicionar_pontos" />
-        <activity android:name=".FinalizarCadastroRota"></activity>
+        <activity android:name=".CadastroRota.FinalizarCadastroRota" />
+        <activity android:name=".EditarPonto"></activity>
     </application>
 
 </manifest>

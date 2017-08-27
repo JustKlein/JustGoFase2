@@ -11,6 +11,7 @@ package com.example.justgo.LogineCadastro;
         import com.android.volley.Response;
         import com.android.volley.toolbox.Volley;
         import com.example.justgo.R;
+        import com.example.justgo.Requests.RegisterRequest;
 
         import org.json.JSONException;
         import org.json.JSONObject;

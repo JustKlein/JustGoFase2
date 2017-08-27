@@ -13,13 +13,15 @@ import android.widget.EditText;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
-import com.example.justgo.Navegacao;
+import com.example.justgo.Drawer.Navegacao;
 import com.example.justgo.R;
+import com.example.justgo.Requests.LoginRequest;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 public class LoginActivity extends AppCompatActivity {
+    public static UsuarioLogado usuarioLogado;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +31,7 @@ public class LoginActivity extends AppCompatActivity {
         final EditText senhaEditText = (EditText) findViewById(R.id.senhaLogin);
         final Button bLogin = (Button) findViewById(R.id.botaoEntrarLogin);
         final VerificaçãodeDados verificar = new VerificaçãodeDados();
+        usuarioLogado =  new UsuarioLogado();
         bLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -52,6 +55,7 @@ public class LoginActivity extends AppCompatActivity {
                         String senha = jsonResponse.getString("senhaResposta");
                         Log.v("Email", email);
                         Log.v("Senha", senha);
+                        usuarioLogado.setUsuario(email);
                         if (email.contentEquals(email) && senha.contentEquals(senha)) {
                             AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
                             builder.setMessage("Logado")

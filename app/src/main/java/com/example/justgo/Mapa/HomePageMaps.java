@@ -9,6 +9,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
 import com.example.justgo.R;
+import com.example.justgo.Requests.GetPontoRequest;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -46,39 +47,39 @@ private int i;
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        Response.Listener<String> responseListener = new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                try {
-
-                    JSONArray jsonResponse = new JSONArray(response);
-
-                    // boolean success = jsonResponse.getBoolean("success");rue
-                    if (true) {
-                        for (i = 0;i<=jsonResponse.length() ; i++) {
-                            Double latitude = jsonResponse.getJSONArray(i).getDouble(1);
-                            Double longitude = jsonResponse.getJSONArray(i).getDouble(2);
-                            LatLng sydney = new LatLng(latitude, longitude);
-                            mMap.addMarker(new MarkerOptions().position(sydney).title("Marker"));
-                            Log.v("AAAAAAAAAAAAA", latitude.toString());
-                        }
-                    } else {
-                        AlertDialog.Builder builder = new AlertDialog.Builder(HomePageMaps.this);
-                        builder.setMessage("DEU ERRADO")
-                                .setNegativeButton("Tentar Novamente", null)
-                                .create()
-                                .show();
-                    }
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        };
-
-        GetPontoRequest getPontoRequest = new GetPontoRequest("teste", responseListener);
-        RequestQueue queue = Volley.newRequestQueue(HomePageMaps.this);
-        queue.add(getPontoRequest);
+//        Response.Listener<String> responseListener = new Response.Listener<String>() {
+//            @Override
+//            public void onResponse(String response) {
+//                try {
+//
+//                    JSONArray jsonResponse = new JSONArray(response);
+//
+//                    // boolean success = jsonResponse.getBoolean("success");rue
+//                    if (true) {
+//                        for (i = 0;i<=jsonResponse.length() ; i++) {
+//                            Double latitude = jsonResponse.getJSONArray(i).getDouble(1);
+//                            Double longitude = jsonResponse.getJSONArray(i).getDouble(2);
+//                            LatLng sydney = new LatLng(latitude, longitude);
+//                            mMap.addMarker(new MarkerOptions().position(sydney).title("Marker"));
+//                            Log.v("AAAAAAAAAAAAA", latitude.toString());
+//                        }
+//                    } else {
+//                        AlertDialog.Builder builder = new AlertDialog.Builder(HomePageMaps.this);
+//                        builder.setMessage("DEU ERRADO")
+//                                .setNegativeButton("Tentar Novamente", null)
+//                                .create()
+//                                .show();
+//                    }
+//
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        };
+//
+//        GetPontoRequest getPontoRequest = new GetPontoRequest("teste", responseListener);
+//        RequestQueue queue = Volley.newRequestQueue(HomePageMaps.this);
+//        queue.add(getPontoRequest);
 
     }
 

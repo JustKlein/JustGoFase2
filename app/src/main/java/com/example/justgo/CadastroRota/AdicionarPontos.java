@@ -1,17 +1,14 @@
-package com.example.justgo;
+package com.example.justgo.CadastroRota;
 
-import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import com.example.justgo.Mapa.Conversor;
-import com.example.justgo.Mapa.RotaAux;
+import com.example.justgo.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -29,7 +26,7 @@ public class AdicionarPontos extends FragmentActivity implements OnMapReadyCallb
     private EditText etPonto;
     private GoogleMap mMap;
     public static RotaAux rota;
-    private Conversor c;
+    private Conversor c,c2;
     private Double[] pontoLatLng;
 
     Polyline polyline;
@@ -48,9 +45,11 @@ public class AdicionarPontos extends FragmentActivity implements OnMapReadyCallb
         etPonto = (EditText) findViewById(R.id.editAddPonto);
         pontoLatLng = new Double[2];
         c = new Conversor(getApplicationContext());
+        c2 = new Conversor(getApplicationContext());
         list = new ArrayList<Polyline>();
         markers = new ArrayList<Marker>();
         pontos = new ArrayList<LatLng>();
+        c2.latLngtoAddress(-19.8986831,-44.0272054);
     }
 
 
@@ -69,9 +68,8 @@ public class AdicionarPontos extends FragmentActivity implements OnMapReadyCallb
         rectOptions = new PolylineOptions();
         for(int i =0;i<pontos.size();i++){
             rectOptions.add(pontos.get(i));
-            Log.v("as",pontos.get(i).toString());
+            //Log.v("as",pontos.get(i).toString());
         }
-
         list.add(mMap.addPolyline(rectOptions));
     }
     public void botaoRemovePonto(View v){
@@ -99,10 +97,10 @@ public class AdicionarPontos extends FragmentActivity implements OnMapReadyCallb
         markers.add(mMap.addMarker(new MarkerOptions().position(ponto).title("Origem")/*.draggable(true)*/));
         pontos.add(ponto);
         aplicaPolyline();
-        rota.setList(list);
-        rota.setMarkers(markers);
-       /* Intent intent = new Intent(this,FinalizarCadastroRota.class);
-        startActivity(intent);*/
+        rota.setPontos(pontos);
+//        rota.setMarkers(markers);
+        Intent intent = new Intent(this,FinalizarCadastroRota.class);
+        startActivity(intent);
 
     }
 

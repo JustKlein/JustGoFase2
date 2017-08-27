@@ -1,10 +1,13 @@
-package com.example.justgo;
+package com.example.justgo.Drawer;
 
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.util.Log;
+
+import com.example.justgo.R;
+
 public class Experiencias extends AppCompatActivity {
 
     private static final String TAG = "Experencias";

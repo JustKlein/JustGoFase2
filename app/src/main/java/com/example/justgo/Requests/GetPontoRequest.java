@@ -1,4 +1,6 @@
-package com.example.justgo.Mapa;
+package com.example.justgo.Requests;
+
+import android.util.Log;
 
 import com.android.volley.Response;
 import com.android.volley.toolbox.StringRequest;
@@ -14,10 +16,11 @@ public class GetPontoRequest extends StringRequest {
     private static final String LOGIN_REQUEST_URL = "https://justgodb.000webhostapp.com/getPontoRequest.php";
     private Map<String, String> params;
 
-    public GetPontoRequest(String email, Response.Listener<String> listener) {
+    public GetPontoRequest(int codRota, Response.Listener<String> listener) {
         super(Method.POST, LOGIN_REQUEST_URL, listener, null);
         params = new HashMap<>();
-        params.put("emailEntrada", email);
+        Log.v("AXAMBASK",Integer.toString(codRota));
+        params.put("codRotaEntrada", Integer.toString(codRota));
     }
 
     @Override

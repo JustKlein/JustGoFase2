@@ -1,4 +1,4 @@
-package com.example.justgo;
+package com.example.justgo.Drawer;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
