@@ -1,7 +1,6 @@
 package com.example.justgo.CadastroRota;
 
 import android.app.AlertDialog;
-import android.app.ListActivity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,21 +8,18 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
 import com.example.justgo.AndroidAdapter;
-import com.example.justgo.Drawer.Navegacao;
-import com.example.justgo.LogineCadastro.LoginActivity;
+import com.example.justgo.EditarPonto;
 import com.example.justgo.LogineCadastro.UsuarioLogado;
-import com.example.justgo.PontoItem;
+import com.example.justgo.Mapa.Conversor;
 import com.example.justgo.R;
 import com.example.justgo.Requests.FinalizarCadastroPontoRequest;
 import com.example.justgo.Requests.FinalizarCadastroRotaRequest;
 import com.example.justgo.Requests.GetPontoRequest;
-import com.example.justgo.Requests.LoginRequest;
 import com.example.justgo.Requests.UltimaRotaAddRequest;
 import com.example.justgo.teste;
 import com.google.android.gms.maps.model.LatLng;
@@ -43,6 +39,8 @@ public class FinalizarCadastroRota extends AppCompatActivity {
     private List<LatLng> pontosRetorno;
     ArrayList<PontoItem> pontoItem;
     ListView listView;
+    Conversor c;
+    JSONArray j;
     public int oi;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +50,7 @@ public class FinalizarCadastroRota extends AppCompatActivity {
         pontosRetorno = new ArrayList<LatLng>();
         pontoItem = new ArrayList<PontoItem>();
         Log.v("PontosEntrada",pontosEntrada.toString());
+        c =  new Conversor(getApplicationContext());
         cadastrarRotanoBD();
     }
 
@@ -158,29 +157,41 @@ public class FinalizarCadastroRota extends AppCompatActivity {
         Log.v("VELHO DO CEU", Integer.toString(codRota));
         Response.Listener<String> responseListener = new Response.Listener<String>() {
             @Override
-            public void onResponse(String response) {
-                try {
-                    JSONArray jsonResponse = new JSONArray(response);
-                    Log.v("saadsassa",Integer.toString(jsonResponse.length()));
-                        for (int i = 0; i < jsonResponse.length()-1; i++) {
-                            LatLng origemLatLng = new LatLng(Double.parseDouble(jsonResponse.getJSONArray(i).getString(1)),Double.parseDouble(
+            public void onResponse(final String response) {
+
+                    try {
+                        final JSONArray jsonResponse = new JSONArray(response);
+                        Log.v("saadsassa", Integer.toString(jsonResponse.length()));
+                        for (int i = 0; i < jsonResponse.length() - 1; i++) {
+                            LatLng origemLatLng = new LatLng(Double.parseDouble(jsonResponse.getJSONArray(i).getString(1)), Double.parseDouble(
                                     jsonResponse.getJSONArray(i).getString(2)));
-                            LatLng destinoLatLng = new LatLng(Double.parseDouble(jsonResponse.getJSONArray(i+1).getString(1)),Double.parseDouble(
-                                    jsonResponse.getJSONArray(i+1).getString(2)));
-                            pontoItem.add(new PontoItem(codRota,origemLatLng,destinoLatLng,jsonResponse.getJSONArray(i).getInt(3)));
+                            LatLng destinoLatLng = new LatLng(Double.parseDouble(jsonResponse.getJSONArray(i + 1).getString(1)), Double.parseDouble(
+                                    jsonResponse.getJSONArray(i + 1).getString(2)));
+                            Log.v("LALALALALA", c.latLngtoAddress(origemLatLng.latitude, origemLatLng.longitude));
+                            pontoItem.add(new PontoItem(codRota, c.latLngtoAddress(origemLatLng.latitude, origemLatLng.longitude),
+                                    c.latLngtoAddress(destinoLatLng.latitude, destinoLatLng.longitude), jsonResponse.getJSONArray(i).getInt(3)));
                         }
-                    list(pontoItem);
-                    listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                        @Override
-                        public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
-                            Log.v("CLICOU EM: ", Integer.toString(position));
+                        list(pontoItem);
+                        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
+                                Log.v("CLICOU EM: ", Integer.toString(position));
+                                Intent intent = new Intent(FinalizarCadastroRota.this, EditarPonto.class);
+                                try {
+                                    intent.putExtra("codRota", jsonResponse.getJSONArray(position).getInt(0));
+                                    intent.putExtra("codPonto", jsonResponse.getJSONArray(position).getInt(3));
+                                    //continuar = false;
+                                    startActivity(intent);
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                                //  intent.putExtra("codPonto",);
+                            }
+                        });
 
-                        }
-                    });
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
             }
 
         };

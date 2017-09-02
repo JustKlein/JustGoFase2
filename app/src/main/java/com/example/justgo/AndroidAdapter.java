@@ -4,14 +4,13 @@ package com.example.justgo;
  * Created by Keven on 8/26/2017.
  */
 import android.app.Activity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import com.example.justgo.R;
+import com.example.justgo.CadastroRota.PontoItem;
 
 import java.util.ArrayList;
 
@@ -39,9 +38,9 @@ public class AndroidAdapter extends ArrayAdapter<PontoItem> {
         TextView tv_Rdata = (TextView) listItemView.findViewById(R.id.n2);
         tv_Rdata.setText(Integer.toString(currentAndroid.getCodRota()));
         TextView tv_3 = (TextView) listItemView.findViewById(R.id.n3);
-        tv_3.setText(currentAndroid.getOrigem().toString());
+        tv_3.setText(currentAndroid.getOrigem());
         TextView tv_4 = (TextView) listItemView.findViewById(R.id.n4);
-        tv_4.setText(currentAndroid.getDestino().toString());
+        tv_4.setText(currentAndroid.getDestino());
 
         return listItemView;
     }

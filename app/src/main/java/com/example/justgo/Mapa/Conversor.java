@@ -31,8 +31,8 @@ public class Conversor {
         resultAddress2="";
         Address a = null;
         Location location = new Location("oi");
-        location.setLatitude(-19.8986831);
-        location.setLongitude(-44.0272054);
+        location.setLatitude(latitude);
+        location.setLongitude(longitude);
         try {
             list = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
             a = list.get(0);
@@ -49,7 +49,7 @@ public class Conversor {
             error = "Illegal arguments";
         }
         Log.v("entrou",a.getAddressLine(0));
-        return resultAddress;
+        return a.getAddressLine(0);
     }
     public Double[] addressToLatLng(String address){
         Double[] array = new Double[2];

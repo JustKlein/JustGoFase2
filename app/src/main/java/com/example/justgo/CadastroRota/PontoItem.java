@@ -1,4 +1,4 @@
-package com.example.justgo;
+package com.example.justgo.CadastroRota;
 
 import com.google.android.gms.maps.model.LatLng;
 
@@ -7,29 +7,29 @@ import com.google.android.gms.maps.model.LatLng;
  */
 
 public class PontoItem {
-    private LatLng origem,destino;
+    private String origem,destino;
     private int codPonto,codRota;
 
-    public PontoItem(int codPonto,LatLng origem, LatLng destino,  int codRota) {
+    public PontoItem(int codPonto,String origem, String destino,  int codRota) {
         this.origem = origem;
         this.destino = destino;
         this.codPonto = codPonto;
         this.codRota = codRota;
     }
 
-    public LatLng getOrigem() {
+    public String getOrigem() {
         return origem;
     }
 
-    public void setOrigem(LatLng origem) {
+    public void setOrigem(String  origem) {
         this.origem = origem;
     }
 
-    public LatLng getDestino() {
+    public String getDestino() {
         return destino;
     }
 
-    public void setDestino(LatLng destino) {
+    public void setDestino(String destino) {
         this.destino = destino;
     }
 
