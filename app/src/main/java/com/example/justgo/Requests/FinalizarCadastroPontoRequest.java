@@ -19,13 +19,14 @@ public class FinalizarCadastroPontoRequest extends StringRequest{
     private static final String REGISTER_REQUEST_URL = "http://justgodb.000webhostapp.com/ponto.php";
     private Map<String,String> params;
     public static teste t;
-    public FinalizarCadastroPontoRequest(int codRota,Double latitude, Double longitude, int codPonto, Response.Listener<String> listener) {
+    public FinalizarCadastroPontoRequest(int codPonto,int codRota,Double latitude, Double longitude, int nroPonto, Response.Listener<String> listener) {
         super(Request.Method.POST, REGISTER_REQUEST_URL, listener, null);
         params = new HashMap<>();
+        params.put("codPontoEntrada", Integer.toString(codPonto));
         params.put("codRotaEntrada", Integer.toString(codRota));
         params.put("latitudeEntrada", Double.toString(latitude));
         params.put("longitudeEntrada", Double.toString(longitude));
-        params.put("codPontoEntrada", Integer.toString(codPonto));
+        params.put("nroPontoEntrada", Integer.toString(nroPonto));
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.example.justgo.CadastroRota;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,6 +14,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -52,7 +54,6 @@ public class AdicionarPontos extends FragmentActivity implements OnMapReadyCallb
         c2.latLngtoAddress(-19.8986831,-44.0272054);
     }
 
-
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
@@ -67,7 +68,7 @@ public class AdicionarPontos extends FragmentActivity implements OnMapReadyCallb
         PolylineOptions rectOptions;
         rectOptions = new PolylineOptions();
         for(int i =0;i<pontos.size();i++){
-            rectOptions.add(pontos.get(i));
+            rectOptions.add(pontos.get(i)).width(5).color(Color.BLUE);
             //Log.v("as",pontos.get(i).toString());
         }
         list.add(mMap.addPolyline(rectOptions));

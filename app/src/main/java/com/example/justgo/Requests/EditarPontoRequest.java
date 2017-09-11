@@ -15,12 +15,16 @@ public class EditarPontoRequest extends StringRequest{
     private static final String REGISTER_REQUEST_URL = "http://justgodb.000webhostapp.com/editarPonto.php";
     private Map<String, String> params;
 
-    public EditarPontoRequest(int codRota, int codPonto,String descricao, Response.Listener<String> listener) {
+    public EditarPontoRequest(int codPonto,int codRota, int nroPonto,String descricao,String tempo,String preco,String meiodeTransporte, Response.Listener<String> listener) {
         super(Request.Method.POST, REGISTER_REQUEST_URL, listener, null);
         params = new HashMap<>();
         params.put("codRotaEntrada", Integer.toString(codRota));
         params.put("codPontoEntrada", Integer.toString(codPonto));
+        params.put("nroPontoEntrada", Integer.toString(nroPonto));
         params.put("descricaoEntrada", descricao);
+        params.put("tempoEntrada", tempo);
+        params.put("precoEntrada", preco);
+        params.put("meiodeTransporteEntrada", meiodeTransporte);
     }
 
     @Override

@@ -17,6 +17,10 @@
         layout="@layout/content_navegacao"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/teste"/>
 
     <android.support.design.widget.NavigationView
         android:id="@+id/nav_view"

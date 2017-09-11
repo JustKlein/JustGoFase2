@@ -13,6 +13,8 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
@@ -63,7 +65,8 @@ public class NovaRota extends FragmentActivity implements OnMapReadyCallback {
             rectOptions.add(sydney);
             sydney = new LatLng(arrayDestino[0], arrayDestino[1]);
             rectOptions.add(sydney);
-            mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
+            BitmapDescriptor icon = BitmapDescriptorFactory.fromResource(R.drawable.marker);
+            mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney").icon(icon));
 
             mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
             Polyline polyline = mMap.addPolyline(rectOptions);

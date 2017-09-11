@@ -8,32 +8,39 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:name="com.google.android.gms.maps.SupportMapFragment"/>
+
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:gravity="center"
+        android:layout_margin="10dp"
+        android:orientation="horizontal"
+        android:background="@drawable/borda">
 
         <EditText
-            android:layout_width="wrap_content"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:hint="Origem"
+            android:hint="@string/origem"
             android:id="@+id/editAddPonto" />
+        <ImageView
+            android:layout_width="55dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_adicionar"
+            android:onClick="botaoAddPonto"/>
+
+        <ImageView
+            android:layout_width="70dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_return"
+            android:onClick="botaoRemovePonto" />
+
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="Vizualizar"
-            android:onClick="botaoAddPonto"
-            />
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="Vizualizar"
-            android:onClick="botaoRemovePonto"
-            />
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="Vizualizar"
+            android:background="@drawable/borda_botao"
+            android:textColor="@color/letraBotao"
+            android:text="Salvar"
+            android:layout_margin="2dp"
             android:onClick="botaoFinalizarPonto"
             />
     </LinearLayout>

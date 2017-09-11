@@ -1,7 +1,11 @@
 package com.example.justgo.Drawer;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -11,13 +15,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 
 import com.example.justgo.CadastroRota.NovaRota;
 import com.example.justgo.Mapa.HomePageMaps;
+import com.example.justgo.MapsHome;
 import com.example.justgo.R;
 
 public class Navegacao extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,8 +71,8 @@ public class Navegacao extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-         //   setContentView(R.layout.activity_sobre);
-        //    return true;
+            //   setContentView(R.layout.activity_sobre);
+            //    return true;
         }
 
         return super.onOptionsItemSelected(item);
@@ -77,7 +86,7 @@ public class Navegacao extends AppCompatActivity
 
         if (id == R.id.nav_experiencia) {
             // abrir experiencias
-            Intent exp =  new Intent (this, Experiencias.class);
+            Intent exp = new Intent(this, Experiencias.class);
             startActivity(exp);
         } else if (id == R.id.nav_pesquisar) {
             // abrir activity para pesquisa
@@ -85,7 +94,7 @@ public class Navegacao extends AppCompatActivity
             // abrir as sugestões
         } else if (id == R.id.nav_config) {
             //abrir as configuracoes
-           Intent config =  new Intent (this, Configuracoes.class);
+            Intent config = new Intent(this, Configuracoes.class);
             startActivity(config);
 
             //setContentView(R.layout.activity_configuracoes);
@@ -99,16 +108,23 @@ public class Navegacao extends AppCompatActivity
         return true;
     }
 
-    public void onClickHomePage(View v){
-        Intent homepage =  new Intent(this, HomePageMaps.class);
+    public void onClickHomePage(View v) {
+        Intent homepage =  new Intent(this, MapsHome.class);
         startActivity(homepage);
+
+
     }
-    public void onClickAddRota(View v){
-        Intent Address =  new Intent(this, NovaRota.class);
+
+
+
+    public void onClickAddRota(View v) {
+        Intent Address = new Intent(this, NovaRota.class);
         startActivity(Address);
     }
-    public void onClickNavegacao(View v){
-        Intent navegacao =  new Intent(this, Navegacao.class);
+
+    public void onClickNavegacao(View v) {
+        Intent navegacao = new Intent(this, Navegacao.class);
         startActivity(navegacao);
     }
+
 }

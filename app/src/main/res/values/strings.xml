@@ -61,5 +61,18 @@
     <string name="title_activity_nova_rota">Map</string>
     <string name="title_activity_adicionar_pontos">Map</string>
 
+    <string name="origem">Origem</string>
+    <string name="destino">Destino</string>
+    <string name="adicionar">Adicionar</string>
+    <string name="salvar">Salvar</string>
+    <string name="visualizar">Visualizar</string>
+    <string name="confirmar">Confirmar</string>
+    <string name="descricao">Descrição</string>
+    <string name="gasto">Gasto estimado</string>
+    <string name="tempo">Tempo estimado</string>
+    <string name="novaRota">Nova Rota</string>
+    <string name="editarPonto">Editar Ponto</string>
+    <string name="selecione">Selecione</string>
+    <string name="title_activity_maps_home">Map</string>
 </resources>
 

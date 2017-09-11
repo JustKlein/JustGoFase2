@@ -13,7 +13,7 @@ import java.util.Map;
 
 public class FinalizarCadastroRotaRequest extends StringRequest{
 
-        private static final String REGISTER_REQUEST_URL = "http://justgodb.000webhostapp.com/rota.php";
+        private static final String REGISTER_REQUEST_URL = "http://justgodb.000webhostapp.com/cadastrarRota.php";
         private Map<String, String> params;
 
         public FinalizarCadastroRotaRequest(String nome, String email, String origemLatitude,String origemLongitude,

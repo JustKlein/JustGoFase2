@@ -7,6 +7,7 @@
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
 
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
@@ -14,6 +15,7 @@
          location permissions for the 'MyLocation' functionality. 
     -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
 
     <application
         android:allowBackup="true"
@@ -31,7 +33,14 @@
             </intent-filter>
         </activity>
         <activity android:name=".LogineCadastro.RegisterActivity" />
-        <activity android:name=".LogineCadastro.LoginActivity" />
+        <activity
+            android:name=".LogineCadastro.LoginActivity"
+            android:parentActivityName=".LogineCadastro.RegisterActivity"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".LogineCadastro.RegisterActivity" />
+        </activity>
 
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
@@ -39,7 +48,7 @@
              Note that the API key is linked to the encryption key used to sign the APK.
              You need a different API key for each encryption key, including the release key that is used to
              sign the APK for publishing.
-             You can define the keys for the debug and release targets in src/debug/ and src/release/. 
+             You can define the keys for the debug and release targets in src/debug/ and src/release/.
         -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -52,19 +61,43 @@
             android:name=".Drawer.Navegacao"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Drawer.Configuracoes" />
+        <activity
+            android:name=".Drawer.Configuracoes"
+            android:label="@string/configuracoes"
+            android:parentActivityName=".Drawer.Navegacao"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Drawer.Navegacao" />
+        </activity>
         <activity
             android:name=".Drawer.Experiencias"
-            android:label="@string/title_activity_experiencias"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:label="@string/experiencias"
+            android:parentActivityName=".Drawer.Navegacao"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Drawer.Navegacao" />
+        </activity>
         <activity
             android:name=".CadastroRota.NovaRota"
             android:label="@string/title_activity_nova_rota" />
         <activity
             android:name=".CadastroRota.AdicionarPontos"
-            android:label="@string/title_activity_adicionar_pontos" />
+            android:label="@string/app_name"
+            android:parentActivityName=".CadastroRota.NovaRota"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".CadastroRota.NovaRota" />
+        </activity>
         <activity android:name=".CadastroRota.FinalizarCadastroRota" />
-        <activity android:name=".EditarPonto"></activity>
+        <activity android:name=".CadastroRota.EditarPonto" />
+        <activity
+            android:name=".MapsHome"
+            android:label="@string/title_activity_maps_home" />
+        <activity android:name=".Drawer.EditarRota" />
+        <activity android:name=".Drawer.MostrarExperiencia"></activity>
     </application>
 
 </manifest>

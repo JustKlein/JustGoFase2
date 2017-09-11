@@ -3,12 +3,21 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Pesquise"
+        android:id="@+id/campodePesquisa"
+        />
+    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Exp2"
-        android:id="@+id/textExp2"
-        />
+        android:hint="Pesquisar"
+        android:id="@+id/botaoPesquisar"/>
+    <ListView
+        android:id="@+id/listViewRotasPesquisa"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 
 </LinearLayout>

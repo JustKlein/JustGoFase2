@@ -15,9 +15,10 @@ public class UltimaRotaAddRequest extends StringRequest {
     private static final String LOGIN_REQUEST_URL = "https://justgodb.000webhostapp.com/ultimoPonto.php";
     private Map<String, String> params;
 
-    public UltimaRotaAddRequest( Response.Listener<String> listener) {
+    public UltimaRotaAddRequest(String usuarioLogado, Response.Listener<String> listener) {
         super(Request.Method.POST, LOGIN_REQUEST_URL, listener, null);
         params = new HashMap<>();
+        params.put("usuarioLogadoEntrada",usuarioLogado);
     }
 
     @Override

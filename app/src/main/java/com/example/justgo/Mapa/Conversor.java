@@ -51,6 +51,32 @@ public class Conversor {
         Log.v("entrou",a.getAddressLine(0));
         return a.getAddressLine(0);
     }
+
+    public Address latLngtoAddress2(Double latitude, Double longitude){
+        resultAddress = "";
+        resultAddress2="";
+        Address a = null;
+        Location location = new Location("oi");
+        location.setLatitude(latitude);
+        location.setLongitude(longitude);
+        try {
+            list = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
+            a = list.get(0);
+            for(int i = 0, tam = a.getMaxAddressLineIndex(); i < tam; i++){
+                resultAddress += a.getAddressLine(i);
+                resultAddress += i < tam - 1 ? ", " : "";
+                Log.v("o","oi");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        catch (IllegalArgumentException e){
+            e.printStackTrace();
+            error = "Illegal arguments";
+        }
+        Log.v("entrou",a.getAddressLine(0));
+        return a;
+    }
     public Double[] addressToLatLng(String address){
         Double[] array = new Double[2];
         resultAddress = "";

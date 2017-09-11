@@ -1,4 +1,4 @@
-package com.example.justgo;
+package com.example.justgo.CadastroRota;
 
 /**
  * Created by Keven on 8/26/2017.
@@ -10,16 +10,16 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import com.example.justgo.CadastroRota.PontoItem;
+import com.example.justgo.R;
 
 import java.util.ArrayList;
 
 
-public class AndroidAdapter extends ArrayAdapter<PontoItem> {
+public class PontoItemAdapter extends ArrayAdapter<PontoItem> {
 
-    private static final String LOG_TAG = AndroidAdapter.class.getSimpleName();
+    private static final String LOG_TAG = PontoItemAdapter.class.getSimpleName();
 
-    public AndroidAdapter(Activity context, ArrayList<PontoItem> android) {
+    public PontoItemAdapter(Activity context, ArrayList<PontoItem> android) {
         super(context, 0, android);
     }
 

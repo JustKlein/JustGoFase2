@@ -1,5 +1,7 @@
 package com.example.justgo.Drawer;
 
+import android.content.Intent;
+import android.location.Address;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -7,44 +9,109 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.justgo.CadastroRota.PontoItemAdapter;
+import com.example.justgo.Mapa.Conversor;
 import com.example.justgo.R;
 
 
 /**
  * Created by Larys on 17/08/2017.
  */
- 
-import android.app.AlertDialog;
-import android.support.v4.app.FragmentActivity;
-import android.os.Bundle;
+
 import android.util.Log;
+import android.widget.AdapterView;
+import android.widget.ListView;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
-import com.example.justgo.R;
 import com.example.justgo.Requests.GetPontoRequest;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapFragment;
-import com.google.android.gms.maps.MapView;
-import com.google.android.gms.maps.MapsInitializer;
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
+import com.example.justgo.Requests.GetRotasdoUsuarioRequest;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 
+import java.util.ArrayList;
+
+import static com.example.justgo.LogineCadastro.LoginActivity.usuarioLogado;
 
 
 public class Experiencia1Fragment extends Fragment {
-
+    ArrayList<RotaItem> rotaItem;
+    ListView listView;
+    Conversor conversor;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.experiencias3_fragment, container, false);
+        View view = inflater.inflate(R.layout.experiencias1_fragment, container, false);
+         conversor = new Conversor(getContext());
+        rotaItem = new ArrayList<RotaItem>();
+        editarPontos();
         return view;
-
     }
+    public void editarPontos() {
+        Response.Listener<String> responseListener = new Response.Listener<String>() {
+            @Override
+            public void onResponse(final String response) {
+                try {
+                    final JSONArray jsonResponse = new JSONArray(response);
+                    Log.v("saadsassa", Integer.toString(jsonResponse.length()));
+                    for (int i = 0; i < jsonResponse.length(); i++) {
+                        String nomeRota = jsonResponse.getJSONArray(i).getString(2);
+                        LatLng origemLatLng = new LatLng(jsonResponse.getJSONArray(i).getDouble(3),jsonResponse.getJSONArray(i).getDouble(4));
+                        LatLng destinoLatLng = new LatLng(jsonResponse.getJSONArray(i).getDouble(5),jsonResponse.getJSONArray(i).getDouble(6));
+                        int codRota = jsonResponse.getJSONArray(i).getInt(0);
+
+                        Address origem = conversor.latLngtoAddress2(origemLatLng.latitude,origemLatLng.longitude);
+                        Address destino = conversor.latLngtoAddress2(destinoLatLng.latitude,destinoLatLng.longitude);
+
+
+                        rotaItem.add(new RotaItem(nomeRota,origem.getSubLocality(),destino.getSubLocality(),codRota));
+                    }
+                    list(rotaItem);
+                    listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
+                            Log.v("CLICOU EM: ", Integer.toString(position));
+                            Intent intent = new Intent(getActivity(),MostrarExperiencia.class);
+                            try{
+                                intent.putExtra("codRota", jsonResponse.getJSONArray(position).getInt(0));
+                                startActivity(intent);
+                            }catch (JSONException e){
+                                e.printStackTrace();
+                            }
+
+                            /*Intent intent = new Intent(Experiencia1Fragment.this, EditarPonto.class);
+                            try {
+                                intent.putExtra("codRota", jsonResponse.getJSONArray(position).getInt(0));
+                                intent.putExtra("codPonto", jsonResponse.getJSONArray(position).getInt(3));
+                                //continuar = false;
+                                startActivity(intent);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }*/
+                            //  intent.putExtra("codPonto",);
+                        }
+                    });
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+        };
+
+        GetRotasdoUsuarioRequest getPontoRequest = new GetRotasdoUsuarioRequest(usuarioLogado.getUsuario(), responseListener);
+        RequestQueue queue = Volley.newRequestQueue(getContext());
+        queue.add(getPontoRequest);
+    }
+
+    public void list(ArrayList<RotaItem> agenda){
+        Log.v("asnkjasj","FILHA DE UMA PUTA");
+        RotaItemAdapter adapter = new RotaItemAdapter(getActivity(), agenda);
+        listView = (ListView) getView().findViewById(R.id.listViewMinhasRotas);
+        listView.setAdapter(adapter);
+    }
+
 }
