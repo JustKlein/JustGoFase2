@@ -1,11 +1,7 @@
 package com.example.justgo.Drawer;
 
 import android.content.Intent;
-import android.database.Cursor;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
-import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -15,13 +11,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ImageView;
 
-import com.example.justgo.CadastroRota.NovaRota;
-import com.example.justgo.Mapa.HomePageMaps;
 import com.example.justgo.MapsHome;
 import com.example.justgo.R;
-import com.example.justgo.Sobre;
 
 public class Navegacao extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {

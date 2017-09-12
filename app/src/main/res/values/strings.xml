@@ -74,5 +74,6 @@
     <string name="editarPonto">Editar Ponto</string>
     <string name="selecione">Selecione</string>
     <string name="title_activity_maps_home">Map</string>
+    <string name="title_activity_sobre">Map</string>
 </resources>
 
