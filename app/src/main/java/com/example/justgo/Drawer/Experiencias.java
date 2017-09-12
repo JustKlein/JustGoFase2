@@ -9,7 +9,7 @@ import android.util.Log;
 import com.example.justgo.R;
 
 public class Experiencias extends AppCompatActivity {
-
+//TESTE PQ SO JESUS SABE COMO FAZER ISSO FUNCIONARS
     private static final String TAG = "Experencias";
 
     private Secoes secoes;
