@@ -13,7 +13,7 @@ public class Experiencias extends AppCompatActivity {
     private static final String TAG = "Experencias";
 
     private Secoes secoes;
-
+//lallallall
     private ViewPager viewPager;
 
     @Override
