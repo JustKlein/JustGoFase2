@@ -21,6 +21,7 @@ import com.example.justgo.CadastroRota.NovaRota;
 import com.example.justgo.Mapa.HomePageMaps;
 import com.example.justgo.MapsHome;
 import com.example.justgo.R;
+import com.example.justgo.Sobre;
 
 public class Navegacao extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -70,9 +71,9 @@ public class Navegacao extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            //   setContentView(R.layout.activity_sobre);
-            //    return true;
+        if (id == R.id.action_sobre) {
+            Intent sobre = new Intent(this, Sobre.class);
+            startActivity(sobre);
         }
 
         return super.onOptionsItemSelected(item);
@@ -88,10 +89,6 @@ public class Navegacao extends AppCompatActivity
             // abrir experiencias
             Intent exp = new Intent(this, Experiencias.class);
             startActivity(exp);
-        } else if (id == R.id.nav_pesquisar) {
-            // abrir activity para pesquisa
-        } else if (id == R.id.nav_sugestoes) {
-            // abrir as sugestões
         } else if (id == R.id.nav_config) {
             //abrir as configuracoes
             Intent config = new Intent(this, Configuracoes.class);
@@ -114,17 +111,4 @@ public class Navegacao extends AppCompatActivity
 
 
     }
-
-
-
-    public void onClickAddRota(View v) {
-        Intent Address = new Intent(this, NovaRota.class);
-        startActivity(Address);
-    }
-
-    public void onClickNavegacao(View v) {
-        Intent navegacao = new Intent(this, Navegacao.class);
-        startActivity(navegacao);
-    }
-
 }
