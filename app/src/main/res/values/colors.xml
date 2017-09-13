@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#209F9F</color>
-    <color name="colorPrimaryDark">#209F9F</color>
-    <color name="colorAccent">#209F9F</color>
+    <color name="colorPrimaryDark">#000</color>
+    <color name="colorAccent">#48D1CC</color>
     <color name="letra">#000</color>
     <color name="branco">#FFF</color>
     <color name="letraBotao">#FFF</color>
     <color name="facebook">#3b5998</color>
-    <color name="cinza">#808080</color>
+    <color name="cinza">#696969</color>
+    <color name="cinzaClaro">#DCDCDC</color>
+
 </resources>

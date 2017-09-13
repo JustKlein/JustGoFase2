@@ -14,12 +14,10 @@ import android.view.MenuItem;
 
 import com.example.justgo.MapsHome;
 import com.example.justgo.R;
+import com.example.justgo.Sobre;
 
 public class Navegacao extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

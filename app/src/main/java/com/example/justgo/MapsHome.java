@@ -10,10 +10,12 @@ import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
+import android.view.View;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
+import com.example.justgo.CadastroRota.NovaRota;
 import com.example.justgo.Requests.Experiencia.GetPontosHomePageRequest;
 import com.example.justgo.Requests.HomePageRequest;
 import com.google.android.gms.common.ConnectionResult;
@@ -170,13 +172,13 @@ public class MapsHome extends FragmentActivity implements OnMapReadyCallback, Go
             // to handle the case where the   user grants the permission. See the documentation
             // for ActivityCompat#requestPermissions for more details.
             System.out.println("AAAAAAAAAAAAAAAAAAAAAAAA");
-           // Location lastLocation = LocationServices.FusedLocationApi.getLastLocation(googleApiClient);
+            // Location lastLocation = LocationServices.FusedLocationApi.getLastLocation(googleApiClient);
             //System.out.println(lastLocation.getLatitude());
 
             return;
         }
-       // Location lastLocation = LocationServices.FusedLocationApi.getLastLocation(googleApiClient);
-       // System.out.println(lastLocation.getLatitude());
+        // Location lastLocation = LocationServices.FusedLocationApi.getLastLocation(googleApiClient);
+        // System.out.println(lastLocation.getLatitude());
 
     }
 
@@ -200,6 +202,11 @@ public class MapsHome extends FragmentActivity implements OnMapReadyCallback, Go
     public void onConnectionFailed(ConnectionResult connectionResult) {
         System.out.println("DEU MERDA");
         pararConexaoComGoogleApi();
+    }
+
+    public void onClickAddRota(View v) {
+        Intent Address = new Intent(this, NovaRota.class);
+        startActivity(Address);
     }
 }
 

@@ -36,11 +36,11 @@ public class RotaItemAdapter extends ArrayAdapter<RotaItem> {
         TextView nome = (TextView) listItemView.findViewById(R.id.nome);
         nome.setText(currentAndroid.getNomeRota());
 
-        TextView tv_Rmanutencao = (TextView) listItemView.findViewById(R.id.n1);
-        tv_Rmanutencao.setText(currentAndroid.getOrigem());
+        //TextView tv_Rmanutencao = (TextView) listItemView.findViewById(R.id.n1);
+        //tv_Rmanutencao.setText(currentAndroid.getOrigem());
 
-        TextView t2 = (TextView) listItemView.findViewById(R.id.n2);
-        t2.setText(currentAndroid.getDestino());
+       // TextView t2 = (TextView) listItemView.findViewById(R.id.n2);
+        //t2.setText(currentAndroid.getDestino());
         return listItemView;
     }
 }

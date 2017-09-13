@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/fundo2"
     tools:context="com.example.justgo.CadastroRota.FinalizarCadastroRota">
 
     <LinearLayout
@@ -11,28 +13,45 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <EditText
-            android:layout_width="wrap_content"
+        <TextView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:text="@string/finalizarCadastroRota"
+            android:textSize="20dp"
+            android:textAlignment="center"
+            android:textColor="@color/letra"
+            android:layout_margin="5dp"/>
+        <EditText
+            android:layout_width="250dp"
+            android:layout_height="40dp"
+            android:padding="10dp"
+            android:layout_margin="5dp"
             android:id="@+id/nomeRota"
-            android:hint="Nome Rota"/>
+            android:hint="@string/tituloRota"
+            android:background="@drawable/borda_geral"/>
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:layout_margin="5dp"
             android:id="@+id/descricaoRota"
-            android:hint="Descricao Rota"
-            android:inputType="text"/>
+            android:hint="@string/descricaoRota"
+            android:inputType="text"
+            android:background="@drawable/borda_geral"
+            />
 
-    <ListView xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/listViewdePontos"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        <ListView
+            android:id="@+id/listViewdePontos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
-
-    <Button
+        <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="botaoFinalizarCadastroRotaePontos"
-        android:hint="Finalizar"/>
+        android:background="@drawable/borda_botao"
+        android:layout_gravity="center"
+        android:textColor="@color/letraBotao"
+        android:text="@string/finalizar"/>
     </LinearLayout>
-</android.support.constraint.ConstraintLayout>
+</LinearLayout>

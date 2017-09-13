@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">JustGo2Fase</string>
+    <string name="app_name">JustGo</string>
     <string name="title_activity_login">Sign in</string>
 
     <!-- Strings related to login -->
@@ -68,12 +68,21 @@
     <string name="visualizar">Visualizar</string>
     <string name="confirmar">Confirmar</string>
     <string name="descricao">Descrição</string>
-    <string name="gasto">Gasto estimado</string>
-    <string name="tempo">Tempo estimado</string>
+    <string name="gasto">Gasto </string>
+    <string name="tempo">Tempo </string>
     <string name="novaRota">Nova Rota</string>
     <string name="editarPonto">Editar Ponto</string>
     <string name="selecione">Selecione</string>
     <string name="title_activity_maps_home">Map</string>
     <string name="title_activity_sobre">Map</string>
+
+    // activity_finalizar_cadastro_rota
+    <string name="tituloRota"> Título da Rota </string>
+    <string name="descricaoRota"> Descrição adicional </string>
+    <string name="finalizarCadastroRota"> Insira as informações abaixo para finalizar sua rota </string>
+    <string name="finalizar">Finalizar</string>
+
+    // editar ponto
+    <string name="addImagem">Adicionar Imagem</string>
 </resources>
 

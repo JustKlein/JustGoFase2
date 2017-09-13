@@ -8,17 +8,6 @@
             android:title="@string/experiencias" />
 
         <item
-            android:id="@+id/nav_pesquisar"
-            android:icon="@drawable/ic_menu_pesquisa"
-            android:title="@string/pesquisar"/>
-
-        <item
-            android:id="@+id/nav_sugestoes"
-            android:icon="@drawable/ic_menu_sugestao"
-            android:title="@string/sugestoes"
-            />
-
-        <item
             android:id="@+id/nav_config"
             android:icon="@drawable/ic_menu_config"
             android:title="@string/configuracoes" />
