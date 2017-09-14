@@ -33,10 +33,6 @@ public class PontoItemAdapter extends ArrayAdapter<PontoItem> {
 
         PontoItem currentAndroid = getItem(position);
 
-        TextView tv_Rmanutencao = (TextView) listItemView.findViewById(R.id.n1);
-        tv_Rmanutencao.setText(Integer.toString(currentAndroid.getCodPonto()));
-        TextView tv_Rdata = (TextView) listItemView.findViewById(R.id.n2);
-        tv_Rdata.setText(Integer.toString(currentAndroid.getCodRota()));
         TextView tv_3 = (TextView) listItemView.findViewById(R.id.n3);
         tv_3.setText(currentAndroid.getOrigem());
         TextView tv_4 = (TextView) listItemView.findViewById(R.id.n4);

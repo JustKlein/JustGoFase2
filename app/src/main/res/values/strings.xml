@@ -76,13 +76,25 @@
     <string name="title_activity_maps_home">Map</string>
     <string name="title_activity_sobre">Map</string>
 
+
     // activity_finalizar_cadastro_rota
-    <string name="tituloRota"> Título da Rota </string>
+    <string name="tituloRota"> Título Ex: Brasil - Itália  </string>
     <string name="descricaoRota"> Descrição adicional </string>
     <string name="finalizarCadastroRota"> Insira as informações abaixo para finalizar sua rota </string>
     <string name="finalizar">Finalizar</string>
 
     // editar ponto
     <string name="addImagem">Adicionar Imagem</string>
+
+    //pontoItem
+
+    <string name="origem2">Origem:</string>
+    <string name="destino2">Destino:</string>
+    <string name="meioDeTransporte2">Meio de Transporte:</string>
+    <string name="tempo2">Tempo:</string>
+    <string name="descricao2">Descrição:</string>
+    <string name="gasto2">Gasto:</string>
+
+    <string name="para">para</string>
 </resources>
 

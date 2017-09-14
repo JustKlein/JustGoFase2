@@ -49,7 +49,6 @@ public class EditarPonto extends AppCompatActivity implements AdapterView.OnItem
     eTDescricao = (EditText) findViewById(R.id.descricaoPonto);
     eTTempo = (EditText) findViewById(R.id.tempoPonto);
     eTPreco = (EditText) findViewById(R.id.precoPonto);
-iV= (ImageView) findViewById(R.id.imagem);
         spin = (Spinner) findViewById(R.id.spinner);
         spin.setOnItemSelectedListener(this);
 
