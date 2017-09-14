@@ -7,52 +7,80 @@
     tools:context="com.example.justgo.CadastroRota.EditarPonto">
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical"
-        android:padding="20dp">
+        android:padding="20dp"
+        android:gravity="center">
 
         <EditText
-            android:layout_width="350dp"
-            android:layout_height="wrap_content"
+            android:layout_width="320dp"
+            android:layout_height="40dp"
+            android:padding="10dp"
             android:id="@+id/descricaoPonto"
             android:hint="@string/descricao"
-            android:inputType="text" />
+            android:inputType="text"
+            android:background="@drawable/borda_geral"/>
         <Spinner
             android:id="@+id/spinner"
             android:layout_width="230dp"
-            android:layout_height="40dp" />
+            android:layout_height="40dp"
+            android:layout_margin="5dp"
+            android:layout_gravity="center"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+
         <EditText
             android:layout_width="150dp"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
+            android:padding="10dp"
+            android:layout_margin="5dp"
             android:id="@+id/precoPonto"
             android:hint="@string/gasto"
-            android:inputType="numberDecimal"/>
+            android:inputType="numberDecimal"
+            android:background="@drawable/borda_geral"/>
+
         <EditText
             android:layout_width="150dp"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
+            android:padding="10dp"
+            android:layout_margin="5dp"
             android:id="@+id/tempoPonto"
             android:hint="@string/tempo"
-            android:inputType="time"/>
-        <Button
-            android:layout_width="wrap_content"
+            android:inputType="time"
+            android:background="@drawable/borda_geral"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/botaoEditarPonto"
-            android:text="@string/confirmar"
-            android:textColor="@color/letraBotao"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/borda_botao"
-            android:onClick="botaoConfirmarEditarPonto"/>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Adicionar Imagens"
-            android:textColor="@color/letraBotao"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/borda_botao"
-            android:onClick="botaoAdicionarImagemEditarPonto"/>
-<ImageView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:id="@+id/imagem"/>
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_margin="10dp">
+
+            <Button
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:text="@string/addImagem"
+                android:textColor="@color/letraBotao"
+                android:layout_margin="10dp"
+                android:background="@drawable/borda_botao"
+                android:onClick="botaoAdicionarImagemEditarPonto"/>
+
+            <Button
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/botaoEditarPonto"
+                android:text="@string/confirmar"
+                android:textColor="@color/letraBotao"
+                android:layout_margin="10dp"
+                android:background="@drawable/borda_botao"
+                android:onClick="botaoConfirmarEditarPonto"/>
+
+        </LinearLayout>
     </LinearLayout>
 </LinearLayout>

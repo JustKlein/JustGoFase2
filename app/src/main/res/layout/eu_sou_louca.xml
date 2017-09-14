@@ -6,26 +6,33 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-        <TextView
-            android:id="@+id/n1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="24dp"/>
 
-        <TextView
-            android:id="@+id/n2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="16dp"/>
         <TextView
             android:id="@+id/n3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="16dp"/>
+            android:textSize="18dp"
+            android:layout_margin="5dp"
+            android:textColor="@color/letra"
+            android:textAlignment="center"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/para"
+            android:textAlignment="center"
+            android:textSize="18dp"
+            android:layout_margin="5dp"
+            android:textColor="@color/letra"
+            android:gravity="center"/>
+
         <TextView
             android:id="@+id/n4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="16dp"/>
+            android:textSize="18dp"
+            android:layout_margin="5dp"
+            android:textColor="@color/letra"
+            android:textAlignment="center"/>
     </LinearLayout>
 </LinearLayout>

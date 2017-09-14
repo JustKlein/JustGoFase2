@@ -50,7 +50,7 @@ public class TrechoItemAdapter extends ArrayAdapter<TrechoItem> {
         TextView preco = (TextView) listItemView.findViewById(R.id.preco);
         preco.setText(Double.toString(currentAndroid.getPreco()));
 
-        TextView meiodeTransporte = (TextView) listItemView.findViewById(R.id.meiodeTransporte);
+        TextView meiodeTransporte = (TextView) listItemView.findViewById(R.id.meioDeTransporte);
         meiodeTransporte.setText(currentAndroid.getMeiodeTransporte());
 
         return listItemView;

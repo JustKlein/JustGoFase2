@@ -15,13 +15,9 @@ import android.view.MenuItem;
 import com.example.justgo.MapsHome;
 import com.example.justgo.R;
 import com.example.justgo.Sobre;
-import com.google.android.gms.maps.MapView;
 
 public class Navegacao extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-
-    private MapView mapView;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,9 +25,6 @@ public class Navegacao extends AppCompatActivity
         setContentView(R.layout.activity_navegacao);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        //mapView = (MapView) findViw
-
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -67,7 +60,7 @@ public class Navegacao extends AppCompatActivity
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatemnt
+        //noinspection SimplifiableIfStatement
         if (id == R.id.action_sobre) {
             Intent sobre = new Intent(this, Sobre.class);
             startActivity(sobre);

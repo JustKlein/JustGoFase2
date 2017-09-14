@@ -5,46 +5,96 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.justgo.LogineCadastro.LoginActivity"
-    android:background="@color/branco">
+    android:background="@drawable/fundo">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="30dp"
+        android:padding="2dp"
         android:gravity="center"
-        android:orientation="vertical">
+        android:layout_gravity="center"
+        android:background="@drawable/borda">
 
         <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="220dp"
-            android:layout_marginBottom="5dp"
-            android:src="@drawable/just_go"
-            android:padding="10dp"/>
-
-        <EditText
-            android:id="@+id/emailLogin"
-            android:layout_width="350dp"
+            android:layout_width="230dp"
+            android:layout_height="230dp"
+            android:src="@drawable/ic_login"
+            android:layout_gravity="center" />
+        <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:hint="@string/email"
-            android:inputType="text"/>
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            >
 
-        <EditText
-            android:id="@+id/senhaLogin"
-            android:layout_width="350dp"
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="40dp"
+                android:src="@drawable/ic_email"
+                android:background="@color/cinzaClaro"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp" />
+            <EditText
+                android:id="@+id/emailLogin"
+                android:layout_width="250dp"
+                android:layout_height="40dp"
+                android:background="@color/cinzaClaro"
+                android:paddingLeft="10dp"
+                android:hint="@string/email"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:inputType="textEmailAddress" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:hint="@string/senha"
-            android:inputType="textPassword"/>
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            >
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="40dp"
+                android:src="@drawable/ic_senha"
+                android:background="@color/cinzaClaro"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp" />
+
+            <EditText
+                android:id="@+id/senhaLogin"
+                android:layout_width="250dp"
+                android:layout_height="40dp"
+                android:background="@color/cinzaClaro"
+                android:paddingLeft="10dp"
+                android:hint="@string/senha"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:inputType="textPassword" />
+        </LinearLayout>
 
         <Button
-            android:onClick="entrarLogin"
             android:id="@+id/botaoEntrarLogin"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:layout_margin="15dp"
-            android:background="@drawable/borda_botao"
+            android:layout_gravity="center"
+            android:padding="3dp"
+            android:textColor="@color/letraBotao"
             android:text="@string/entrarLogin"
-            android:textColor="@color/letraBotao" />
+            android:background="@drawable/borda_botao"
+            android:layout_margin="10dp"/>
 
     </LinearLayout>
+
 </LinearLayout>
+

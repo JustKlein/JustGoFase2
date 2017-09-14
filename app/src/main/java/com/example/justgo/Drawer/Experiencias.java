@@ -37,9 +37,9 @@ public class Experiencias extends AppCompatActivity {
     public void setupViewPager(ViewPager viewPager)
     {
         Secoes adaptador = new Secoes(getSupportFragmentManager());
-        adaptador.adicionaFragmento(new Experiencia1Fragment(), "Inserir");
-        adaptador.adicionaFragmento(new Experiencia2Fragment(),"Pesquisar");
-        adaptador.adicionaFragmento(new Experiencia3Fragment(),"Sugestões");
+        adaptador.adicionaFragmento(new Experiencia1Fragment(), "Minhas Experiencias");
+        adaptador.adicionaFragmento(new Experiencia2Fragment(),"Pesquisar Experiências");
+        adaptador.adicionaFragmento(new Experiencia3Fragment(),"Sugestões de Lugares");
         viewPager.setAdapter(adaptador);
     }
 }
