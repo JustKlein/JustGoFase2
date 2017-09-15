@@ -26,6 +26,7 @@ public class NovaRota extends FragmentActivity implements OnMapReadyCallback {
     private GoogleMap mMap;
     private EditText origem, destino;
     private Conversor c;
+    private Double[] arraydeTeste;
     private Double[] arrayOrigem;
     private Double[] arrayDestino;
     public static RotaAux origemDestino;
@@ -45,6 +46,7 @@ public class NovaRota extends FragmentActivity implements OnMapReadyCallback {
         c = new Conversor(getApplicationContext());
         arrayOrigem = new Double[2];
         arrayDestino = new Double[2];
+        arraydeTeste = new Double[2];
         rectOptions = new PolylineOptions();
 
     }
@@ -53,6 +55,7 @@ public class NovaRota extends FragmentActivity implements OnMapReadyCallback {
         if (origem != null && destino != null) {
             String addressOrigem = origem.getText().toString();
             String addressDestino = destino.getText().toString();
+            arraydeTeste = c.addressToLatLng("Rua vergara 755");
             arrayOrigem = c.addressToLatLng(addressOrigem);
             Log.v("LATITUDE", arrayOrigem[0].toString());
             Log.v("LONGITUDE", arrayOrigem[1].toString());

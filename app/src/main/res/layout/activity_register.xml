@@ -3,9 +3,9 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/fundo"
-        tools:context="com.example.justgo.LogineCadastro.RegisterActivity">
 
+        tools:context="com.example.justgo.LogineCadastro.RegisterActivity">
+    <!--android:background="@drawable/fundo"-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -23,8 +23,8 @@
             android:layout_width="200dp"
             android:layout_height="200dp"
             android:layout_gravity="center"
-            android:src="@drawable/ic_cadastro" />
-
+           />
+        <!--android:src="@drawable/ic_cadastro"-->
         <EditText
             android:id="@+id/nomeCadastro"
             android:layout_width="300dp"

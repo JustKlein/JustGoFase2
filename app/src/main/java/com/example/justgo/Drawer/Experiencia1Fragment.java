@@ -47,10 +47,13 @@ public class Experiencia1Fragment extends Fragment {
         View view = inflater.inflate(R.layout.experiencias1_fragment, container, false);
          conversor = new Conversor(getContext());
         rotaItem = new ArrayList<RotaItem>();
+        rotaItem.clear();
         editarPontos();
         return view;
     }
+
     public void editarPontos() {
+        rotaItem.clear();
         Response.Listener<String> responseListener = new Response.Listener<String>() {
             @Override
             public void onResponse(final String response) {
