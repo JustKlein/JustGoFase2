@@ -84,6 +84,7 @@
         <activity
             android:name=".CadastroRota.AdicionarPontos"
             android:label="@string/app_name"
+            android:noHistory="true"
             android:parentActivityName=".CadastroRota.NovaRota"
             android:theme="@style/AppTheme">
             <meta-data
@@ -91,8 +92,8 @@
                 android:value=".CadastroRota.NovaRota" />
         </activity>
         <activity android:name=".CadastroRota.FinalizarCadastroRota" />
-
-        <activity android:name=".CadastroRota.EditarPonto"
+        <activity
+            android:name=".CadastroRota.EditarPonto"
             android:label="@string/experiencias"
             android:parentActivityName=".CadastroRota.FinalizarCadastroRota"
             android:theme="@style/AppTheme">
@@ -100,13 +101,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".CadastroRota.FinalizarCadastroRota" />
         </activity>
-
         <activity
             android:name=".MapsHome"
             android:label="@string/title_activity_maps_home" />
         <activity android:name=".Drawer.EditarRota" />
         <activity android:name=".Drawer.MostrarExperiencia" />
-        <activity android:name=".Sobre"></activity>
+        <activity android:name=".Sobre" />
+        <activity
+            android:name=".Drawer.MapaMostratExperiencia"
+            android:label="@string/title_activity_mapa_mostrat_experiencia"></activity>
     </application>
 
 </manifest>

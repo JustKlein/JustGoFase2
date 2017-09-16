@@ -1,8 +1,10 @@
 package com.example.justgo.Drawer;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -34,11 +36,12 @@ public class MostrarExperiencia extends AppCompatActivity {
         setContentView(R.layout.activity_mostrar_experiencia);
         Bundle bundle = getIntent().getExtras();
         codRota = bundle.getInt("codRota");
+        System.out.print("ROTAAA" + codRota);
         tVNomeRota = (TextView) findViewById(R.id.nomeRotaMostrarExperiencia);
         tVOrigem = (TextView) findViewById(R.id.origemMostrarExeriencia);
         tVDestino = (TextView) findViewById(R.id.destinoMostrarExperiencia);
-        tVTempoGasto = (TextView) findViewById(R.id.tempoGastoMostrarExperiencia);
-        tVValorGasto = (TextView) findViewById(R.id.valorGastoMostrarExeriencia);
+        //tVTempoGasto = (TextView) findViewById(R.id.tempoGastoMostrarExperiencia);
+        //tVValorGasto = (TextView) findViewById(R.id.valorGastoMostrarExeriencia);
         tVDescricao = (TextView) findViewById(R.id.descricaoMostrarExeriencia);
         listViewPontosdaRota = (ListView) findViewById(R.id.listViewPontosMostrarExperiencia);
         conversor = new Conversor(getApplicationContext());
@@ -113,5 +116,9 @@ public class MostrarExperiencia extends AppCompatActivity {
         listViewPontosdaRota.setAdapter(adapter);
 
     }
-
+    public void verMapaMostrarExeperiencia(View v){
+        Intent intent = new Intent(MostrarExperiencia.this, MapaMostratExperiencia.class);
+            intent.putExtra("trecho", codRota);
+        startActivity(intent);
+    }
 }

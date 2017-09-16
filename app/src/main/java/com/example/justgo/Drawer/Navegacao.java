@@ -1,5 +1,6 @@
 package com.example.justgo.Drawer;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Camera;
 import android.graphics.Color;
@@ -49,6 +50,7 @@ public class Navegacao extends AppCompatActivity
     ArrayList pontosDentrodoRaio;
     List<PolylineOptions> polylines;
     private GoogleApiClient googleApiClient;
+    ProgressDialog progressDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -173,6 +175,7 @@ public class Navegacao extends AppCompatActivity
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        progressDialog = ProgressDialog.show(Navegacao.this, "CarregandoPontos", "Aguarde");
         Response.Listener<String> responseListener = new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -201,6 +204,7 @@ public class Navegacao extends AppCompatActivity
                                         rectOptions.add(new LatLng(json.getJSONArray(j).getDouble(2), json.getJSONArray(j).getDouble(3)));
 
                                     }
+                                    progressDialog.cancel();
                                     mMap.addPolyline(rectOptions);
                                 }
 
@@ -223,7 +227,9 @@ public class Navegacao extends AppCompatActivity
         HomePageRequest homePageRequest = new HomePageRequest(-19.8986831, -44.0293941, responseListener);
         RequestQueue queue = Volley.newRequestQueue(Navegacao.this);
         queue.add(homePageRequest);
+
     mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(-19.8986831, -44.0293941),8));
+
     }
 
 }

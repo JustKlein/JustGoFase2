@@ -28,25 +28,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/destinoMostrarExperiencia"/>
-        <TextView
+        <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="teste"
-            android:id="@+id/tempoGastoMostrarExperiencia"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="teste"
-            android:id="@+id/valorGastoMostrarExeriencia"/>
+            android:textAlignment="center"
+            android:text="Ver Rota no Mapa"
+            android:onClick="verMapaMostrarExeperiencia"/>
         <ListView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/listViewPontosMostrarExperiencia"/>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAlignment="center"
-            android:onClick="verMapaMostrarExeperiencia"/>
+
 
     </LinearLayout>
 

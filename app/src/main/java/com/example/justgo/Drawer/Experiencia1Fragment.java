@@ -1,5 +1,6 @@
 package com.example.justgo.Drawer;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.location.Address;
 import android.os.Bundle;
@@ -40,6 +41,7 @@ import static com.example.justgo.LogineCadastro.LoginActivity.usuarioLogado;
 public class Experiencia1Fragment extends Fragment {
     ArrayList<RotaItem> rotaItem;
     ListView listView;
+    ProgressDialog progressDialog;
     Conversor conversor;
     @Nullable
     @Override
@@ -54,12 +56,14 @@ public class Experiencia1Fragment extends Fragment {
 
     public void editarPontos() {
         rotaItem.clear();
+        progressDialog = ProgressDialog.show(getContext(), "CarregandoPontos", "Aguarde");
         Response.Listener<String> responseListener = new Response.Listener<String>() {
             @Override
             public void onResponse(final String response) {
                 try {
                     final JSONArray jsonResponse = new JSONArray(response);
                     Log.v("saadsassa", Integer.toString(jsonResponse.length()));
+
                     for (int i = 0; i < jsonResponse.length(); i++) {
                         String nomeRota = jsonResponse.getJSONArray(i).getString(2);
                         LatLng origemLatLng = new LatLng(jsonResponse.getJSONArray(i).getDouble(3),jsonResponse.getJSONArray(i).getDouble(4));
@@ -73,12 +77,14 @@ public class Experiencia1Fragment extends Fragment {
                         rotaItem.add(new RotaItem(nomeRota,origem.getSubLocality(),destino.getSubLocality(),codRota));
                     }
                     list(rotaItem);
+
                     listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
                             Log.v("CLICOU EM: ", Integer.toString(position));
                             Intent intent = new Intent(getActivity(),MostrarExperiencia.class);
                             try{
+                                progressDialog.cancel();
                                 intent.putExtra("codRota", jsonResponse.getJSONArray(position).getInt(0));
                                 startActivity(intent);
                             }catch (JSONException e){
@@ -97,7 +103,7 @@ public class Experiencia1Fragment extends Fragment {
                             //  intent.putExtra("codPonto",);
                         }
                     });
-
+                    progressDialog.cancel();
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -111,7 +117,6 @@ public class Experiencia1Fragment extends Fragment {
     }
 
     public void list(ArrayList<RotaItem> agenda){
-        Log.v("asnkjasj","FILHA DE UMA PUTA");
         RotaItemAdapter adapter = new RotaItemAdapter(getActivity(), agenda);
         listView = (ListView) getView().findViewById(R.id.listViewMinhasRotas);
         listView.setAdapter(adapter);

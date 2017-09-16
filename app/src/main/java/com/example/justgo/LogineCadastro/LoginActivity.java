@@ -2,6 +2,7 @@ package com.example.justgo.LogineCadastro;
 
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -25,6 +26,7 @@ import org.json.JSONObject;
 public class LoginActivity extends AppCompatActivity {
     public static UsuarioLogado usuarioLogado;
     SharedPreferences sharedPreferences;
+    ProgressDialog aguarde;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +44,9 @@ public class LoginActivity extends AppCompatActivity {
                 final String email = emailEditText.getText().toString();
                 final String senha = senhaEditText.getText().toString();
               //  if (verificar.verificarLogin(email, senha) == false) {
+                aguarde= ProgressDialog.show(LoginActivity.this,"Logando","Aguarde");
+
+
                     BD(email,senha);
                 //}
             }
@@ -61,17 +66,14 @@ public class LoginActivity extends AppCompatActivity {
                             Log.v("Senha", senha);
                             usuarioLogado.setUsuario(email);
                             if (email.contentEquals(email) && senha.contentEquals(senha)) {
-                                AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
-                                builder.setMessage("Logado")
-                                        .setNegativeButton("TentarNovamente", null)
-                                        .create()
-                                        .show();
+                                aguarde.cancel();
                                 SharedPreferences.Editor editor = sharedPreferences.edit();
                                 editor.putString("Usuario", email);
                                 Intent home = new Intent(LoginActivity.this, Navegacao.class);
                                 startActivity(home);
                             }
                         } else {
+                            aguarde.cancel();
                             AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
                             builder.setMessage("Não foi possível efetuar o Login")
                                     .setNegativeButton("Tentar Novamente", null)

@@ -10,6 +10,9 @@
         android:text="Exp3"
         android:id="@+id/textExp3"
         />
-
+    <ListView
+        android:id="@+id/listViewSugestoesRota"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 </LinearLayout>

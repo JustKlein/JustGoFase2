@@ -1,5 +1,6 @@
 package com.example.justgo.CadastroRota;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.database.Cursor;
 import android.media.Image;
@@ -27,6 +28,7 @@ import org.json.JSONObject;
 public class EditarPonto extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
     private static final int SELECT_PICTURE = 1;
     private String selectedImagePath;
+    ProgressDialog progressDialog;
     private EditText eTDescricao,eTTempo,eTPreco;
     private int codRota, codPonto,nroPonto;
     ImageView iV;
@@ -74,19 +76,17 @@ public class EditarPonto extends AppCompatActivity implements AdapterView.OnItem
         String descricao = eTDescricao.getText().toString();
         String tempo = eTTempo.getText().toString();
         String preco = eTPreco.getText().toString();
-
+        progressDialog = ProgressDialog.show(EditarPonto.this, "Salvando", "Aguarde");
         Response.Listener<String> responseListener = new Response.Listener<String>() {
 
             @Override
             public void onResponse(String response) {
-
                 try {
 
                     JSONObject jsonResponse = new JSONObject(response);
                     boolean success = jsonResponse.getBoolean("success");
-                    Log.v("asdkla","aaaaaaaaaaaaaaaaaaa");
                     if (success) {
-                        Log.v("PONTO EDITADO","OKZAO");
+                        progressDialog.cancel();
                         onBackPressed();
                     }
                 } catch (JSONException e) {

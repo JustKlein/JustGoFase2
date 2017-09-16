@@ -1,6 +1,7 @@
 package com.example.justgo.Drawer;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SyncStatusObserver;
 import android.location.Address;
@@ -39,6 +40,7 @@ public class Experiencia2Fragment extends Fragment {
     EditText eTPesquisa;
     Button bTPesquisa;
     Conversor conversor;
+    ProgressDialog progressDialog;
     ListView listView;
     ArrayList<RotaItem> rotaItem;
 
@@ -50,7 +52,7 @@ public class Experiencia2Fragment extends Fragment {
         bTPesquisa = (Button) view.findViewById(R.id.botaoPesquisar);
         conversor = new Conversor(getContext());
         rotaItem = new ArrayList<RotaItem>();
-        bTPesquisa.setOnClickListener(new View.OnClickListener(){
+        bTPesquisa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 rotaItem.clear();
@@ -59,53 +61,57 @@ public class Experiencia2Fragment extends Fragment {
         });
         return view;
     }
-    public void pesquisar()
-    {
+
+    public void pesquisar() {
         String pesquisa = eTPesquisa.getText().toString();
+        progressDialog = ProgressDialog.show(getContext(), "Pesquisando", "Aguarde");
         Response.Listener<String> responseListener = new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
-                        final JSONArray jsonResponse = new JSONArray(response);
-                        for (int i = 0; i < jsonResponse.length(); i++) {
-                            String nomeRota = jsonResponse.getJSONArray(i).getString(2);
-                            LatLng origemLatLng = new LatLng(jsonResponse.getJSONArray(i).getDouble(3),jsonResponse.getJSONArray(i).getDouble(4));
-                            LatLng destinoLatLng = new LatLng(jsonResponse.getJSONArray(i).getDouble(5),jsonResponse.getJSONArray(i).getDouble(6));
-                            int codRota = jsonResponse.getJSONArray(i).getInt(0);
+                    final JSONArray jsonResponse = new JSONArray(response);
 
-                            Address origem = conversor.latLngtoAddress2(origemLatLng.latitude,origemLatLng.longitude);
-                            Address destino = conversor.latLngtoAddress2(destinoLatLng.latitude,destinoLatLng.longitude);
+                    for (int i = 0; i < jsonResponse.length(); i++) {
+                        String nomeRota = jsonResponse.getJSONArray(i).getString(2);
+                        LatLng origemLatLng = new LatLng(jsonResponse.getJSONArray(i).getDouble(3), jsonResponse.getJSONArray(i).getDouble(4));
+                        LatLng destinoLatLng = new LatLng(jsonResponse.getJSONArray(i).getDouble(5), jsonResponse.getJSONArray(i).getDouble(6));
+                        int codRota = jsonResponse.getJSONArray(i).getInt(0);
+
+                        Address origem = conversor.latLngtoAddress2(origemLatLng.latitude, origemLatLng.longitude);
+                        Address destino = conversor.latLngtoAddress2(destinoLatLng.latitude, destinoLatLng.longitude);
 
 
-                            rotaItem.add(new RotaItem(nomeRota,origem.getSubLocality(),destino.getSubLocality(),codRota));
-                        }
+                        rotaItem.add(new RotaItem(nomeRota, origem.getSubLocality(), destino.getSubLocality(), codRota));
+                    }
 
-                        list(rotaItem);
-                        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                            @Override
-                            public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
-                                Log.v("CLICOU EM: ", Integer.toString(position));
-                                Intent intent = new Intent(getActivity(),MostrarExperiencia.class);
-                                try{
-                                    intent.putExtra("codRota", jsonResponse.getJSONArray(position).getInt(0));
-                                    startActivity(intent);
-                                }catch (JSONException e){
-                                    e.printStackTrace();
-                                }
+                    list(rotaItem);
+                    progressDialog.cancel();
+                    listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
+                            Log.v("CLICOU EM: ", Integer.toString(position));
+                            Intent intent = new Intent(getActivity(), MostrarExperiencia.class);
+                            try {
+                                intent.putExtra("codRota", jsonResponse.getJSONArray(position).getInt(0));
+                                startActivity(intent);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
                             }
-                        });
+                        }
+                    });
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }
         };
 
-        PesquisaRequest pesquisaRequest = new PesquisaRequest(pesquisa,responseListener);
+        PesquisaRequest pesquisaRequest = new PesquisaRequest(pesquisa, responseListener);
         RequestQueue queue = Volley.newRequestQueue(getContext());
         queue.add(pesquisaRequest);
     }
-    public void list(ArrayList<RotaItem> agenda){
-        Log.v("asnkjasj","FILHA DE UMA PUTA");
+
+    public void list(ArrayList<RotaItem> agenda) {
+        Log.v("asnkjasj", "FILHA DE UMA PUTA");
         RotaItemAdapter adapter = new RotaItemAdapter(getActivity(), agenda);
         listView = (ListView) getView().findViewById(R.id.listViewRotasPesquisa);
         listView.setAdapter(adapter);
