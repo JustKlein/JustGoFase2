@@ -78,6 +78,7 @@ public class Conversor {
         return a;
     }
     public Double[] addressToLatLng(String address){
+
         Double[] array = new Double[2];
         resultAddress = "";
         resultAddress2="";
