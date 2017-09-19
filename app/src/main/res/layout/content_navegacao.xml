@@ -5,19 +5,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.justgo.Drawer.Navegacao">
+
+    <com.google.android.gms.maps.MapView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/mapHome"></com.google.android.gms.maps.MapView>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:gravity="center">
+        android:layout_height="match_parent"
+        android:gravity="bottom|right"
+        android:padding="10dp">
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Home"
-            android:onClick="onClickHomePage"
-            />
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/ic_add"
+            android:onClick="onClickAddRota"/>
 
     </LinearLayout>
+
 
 </LinearLayout>

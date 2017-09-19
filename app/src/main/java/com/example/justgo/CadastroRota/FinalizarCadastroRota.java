@@ -1,6 +1,7 @@
 package com.example.justgo.CadastroRota;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -36,7 +37,8 @@ import java.util.List;
 public class FinalizarCadastroRota extends AppCompatActivity {
     RotaAux rota;
     UsuarioLogado usuarioLogado;
-   teste t;
+    teste t;
+    ProgressDialog progressDialog;
     int IDCODROTA;
     private List<LatLng> pontosEntrada;
     private List<LatLng> pontosRetorno;
@@ -45,6 +47,7 @@ public class FinalizarCadastroRota extends AppCompatActivity {
     Conversor c;
     JSONArray j;
     public int oi;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,12 +55,12 @@ public class FinalizarCadastroRota extends AppCompatActivity {
         pontosEntrada = rota.getPontos();
         pontosRetorno = new ArrayList<LatLng>();
         pontoItem = new ArrayList<PontoItem>();
-        Log.v("PontosEntrada",pontosEntrada.toString());
-        c =  new Conversor(getApplicationContext());
+        Log.v("PontosEntrada", pontosEntrada.toString());
+        c = new Conversor(getApplicationContext());
         cadastrarRotanoBD();
     }
 
-    public void cadastrarRotanoBD(){
+    public void cadastrarRotanoBD() {
         Response.Listener<String> responseListener = new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -72,10 +75,12 @@ public class FinalizarCadastroRota extends AppCompatActivity {
                                 .setNegativeButton("Ok", null)
                                 .create()
                                 .show();
-                                     Log.v("PONTOS",Integer.toString(pontosEntrada.size()));
-                                   for(int i = 0; i < pontosEntrada.size();i++) {
-                                      cadastrarPontosnoBD(idRota, pontosEntrada.get(i).latitude, pontosEntrada.get(i).longitude, i+1);
-                                }
+                        Log.v("PONTOS", Integer.toString(pontosEntrada.size()));
+                        progressDialog = ProgressDialog.show(FinalizarCadastroRota.this, "CadastrandoPontos", "Aguarde");
+                        for (int i = 0; i < pontosEntrada.size(); i++) {
+                            cadastrarPontosnoBD(idRota, pontosEntrada.get(i).latitude, pontosEntrada.get(i).longitude, i + 1);
+                        }
+                        progressDialog.cancel();
                         ultimaRotaAdd();
 
                     } else {
@@ -92,22 +97,22 @@ public class FinalizarCadastroRota extends AppCompatActivity {
             }
         };
 
-        FinalizarCadastroRotaRequest finalizarCadastroRotaRequest = new FinalizarCadastroRotaRequest("Rota sem Nome",usuarioLogado.getUsuario(),rota.getOrigemLat().toString(),
-                rota.getOrigemLng().toString(),rota.getDestinoLat().toString(), rota.getDestinoLng().toString(),responseListener);
+        FinalizarCadastroRotaRequest finalizarCadastroRotaRequest = new FinalizarCadastroRotaRequest("Rota sem Nome", usuarioLogado.getUsuario(), rota.getOrigemLat().toString(),
+                rota.getOrigemLng().toString(), rota.getDestinoLat().toString(), rota.getDestinoLng().toString(), responseListener);
         RequestQueue queue = Volley.newRequestQueue(FinalizarCadastroRota.this);
         queue.add(finalizarCadastroRotaRequest);
     }
-    public void cadastrarPontosnoBD(final int codRota, Double latitude, Double longitude, int nroPonto){
+
+    public void cadastrarPontosnoBD(final int codRota, Double latitude, Double longitude, int nroPonto) {
         Response.Listener<String> responseListener = new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
                     JSONObject jsonResponse = new JSONObject(response);
                     boolean success = jsonResponse.getBoolean("success");
-                    if (success){
-                        Log.v("ENTOU","EEE");
-                    }
-                    else {
+                    if (success) {
+                        Log.v("ENTOU", "EEE");
+                    } else {
                         AlertDialog.Builder builder = new AlertDialog.Builder(FinalizarCadastroRota.this);
                         builder.setMessage("Erro ao cadastrar usuário")
                                 .setNegativeButton("Tentar novamente", null)
@@ -121,12 +126,12 @@ public class FinalizarCadastroRota extends AppCompatActivity {
             }
         };
         int codPonto = Integer.parseInt(Integer.toString(codRota).concat(Integer.toString(nroPonto)));
-        FinalizarCadastroPontoRequest finalizarCadastroPontoRequest = new FinalizarCadastroPontoRequest(codPonto,codRota,latitude,longitude,nroPonto,responseListener);
+        FinalizarCadastroPontoRequest finalizarCadastroPontoRequest = new FinalizarCadastroPontoRequest(codPonto, codRota, latitude, longitude, nroPonto, responseListener);
         RequestQueue queue = Volley.newRequestQueue(FinalizarCadastroRota.this);
         queue.add(finalizarCadastroPontoRequest);
     }
 
-    public void ultimaRotaAdd(){
+    public void ultimaRotaAdd() {
         Response.Listener<String> responseListener = new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -151,7 +156,7 @@ public class FinalizarCadastroRota extends AppCompatActivity {
             }
         };
 
-        UltimaRotaAddRequest ultimaRotaAddRequest = new UltimaRotaAddRequest(usuarioLogado.getUsuario(),responseListener);
+        UltimaRotaAddRequest ultimaRotaAddRequest = new UltimaRotaAddRequest(usuarioLogado.getUsuario(), responseListener);
         Log.v("ASSSSSSASSASS", usuarioLogado.getUsuario());
         RequestQueue queue = Volley.newRequestQueue(FinalizarCadastroRota.this);
         queue.add(ultimaRotaAddRequest);
@@ -160,45 +165,45 @@ public class FinalizarCadastroRota extends AppCompatActivity {
     public void editarPontos(final int codRota) {
         IDCODROTA = codRota;
         Log.v("VELHO DO CEU", Integer.toString(codRota));
+        progressDialog = ProgressDialog.show(FinalizarCadastroRota.this, "Carregando Pontos", "Aguarde");
         Response.Listener<String> responseListener = new Response.Listener<String>() {
             @Override
             public void onResponse(final String response) {
 
-                    try {
-                        final JSONArray jsonResponse = new JSONArray(response);
-                        Log.v("saadsassa", Integer.toString(jsonResponse.length()));
-                        for (int i = 0; i < jsonResponse.length() - 1; i++) {
-                            LatLng origemLatLng = new LatLng(Double.parseDouble(jsonResponse.getJSONArray(i).getString(2)), Double.parseDouble(
-                                    jsonResponse.getJSONArray(i).getString(3)));
-                            LatLng destinoLatLng = new LatLng(Double.parseDouble(jsonResponse.getJSONArray(i + 1).getString(2)), Double.parseDouble(jsonResponse.getJSONArray(i + 1).getString(3)));
-                            Log.v("LALALALALA", c.latLngtoAddress(origemLatLng.latitude, origemLatLng.longitude));
-                            pontoItem.add(new PontoItem(jsonResponse.getJSONArray(i).getInt(0),jsonResponse.getJSONArray(i).getInt(4), c.latLngtoAddress(origemLatLng.latitude, origemLatLng.longitude),
-                                    c.latLngtoAddress(destinoLatLng.latitude, destinoLatLng.longitude), codRota));
-                        }
-                        LatLng origemLatLng = new LatLng(Double.parseDouble(jsonResponse.getJSONArray(jsonResponse.length()-1).getString(2)), Double.parseDouble(jsonResponse.getJSONArray(jsonResponse.length()-1).getString(3)));
-                        pontoItem.add(new PontoItem(jsonResponse.getJSONArray(jsonResponse.length()-1).getInt(0),jsonResponse.getJSONArray(jsonResponse.length()-1).getInt(4), c.latLngtoAddress(origemLatLng.latitude,origemLatLng.longitude),null,codRota));
-                        list(pontoItem);
-                        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                            @Override
-                            public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
-                                Log.v("CLICOU EM: ", Integer.toString(position));
-                                Intent intent = new Intent(FinalizarCadastroRota.this, EditarPonto.class);
-                                try {
-                                    intent.putExtra("codPonto", jsonResponse.getJSONArray(position).getInt(0));
-                                    intent.putExtra("codRota", jsonResponse.getJSONArray(position).getInt(1));
-                                    intent.putExtra("nroPonto", jsonResponse.getJSONArray(position).getInt(4));
-                                    //continuar = false;
-                                    startActivity(intent);
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
-                                //  intent.putExtra("codPonto",);
-                            }
-                        });
-
-                    } catch (JSONException e) {
-                        e.printStackTrace();
+                try {
+                    final JSONArray jsonResponse = new JSONArray(response);
+                    Log.v("saadsassa", Integer.toString(jsonResponse.length()));
+                    for (int i = 0; i < jsonResponse.length() - 1; i++) {
+                        LatLng origemLatLng = new LatLng(Double.parseDouble(jsonResponse.getJSONArray(i).getString(2)), Double.parseDouble(
+                                jsonResponse.getJSONArray(i).getString(3)));
+                        LatLng destinoLatLng = new LatLng(Double.parseDouble(jsonResponse.getJSONArray(i + 1).getString(2)), Double.parseDouble(jsonResponse.getJSONArray(i + 1).getString(3)));
+                        Log.v("LALALALALA", c.latLngtoAddress(origemLatLng.latitude, origemLatLng.longitude));
+                        pontoItem.add(new PontoItem(jsonResponse.getJSONArray(i).getInt(0), jsonResponse.getJSONArray(i).getInt(4), c.latLngtoAddress(origemLatLng.latitude, origemLatLng.longitude),
+                                c.latLngtoAddress(destinoLatLng.latitude, destinoLatLng.longitude), codRota));
                     }
+                    list(pontoItem);
+                    progressDialog.cancel();
+                    listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
+                            Log.v("CLICOU EM: ", Integer.toString(position));
+                            Intent intent = new Intent(FinalizarCadastroRota.this, EditarPonto.class);
+                            try {
+                                intent.putExtra("codPonto", jsonResponse.getJSONArray(position).getInt(0));
+                                intent.putExtra("codRota", jsonResponse.getJSONArray(position).getInt(1));
+                                intent.putExtra("nroPonto", jsonResponse.getJSONArray(position).getInt(4));
+                                //continuar = false;
+                                startActivity(intent);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                            //  intent.putExtra("codPonto",);
+                        }
+                    });
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
 
         };
@@ -208,19 +213,21 @@ public class FinalizarCadastroRota extends AppCompatActivity {
         queue.add(getPontoRequest);
     }
 
-    public void list(ArrayList<PontoItem> agenda){
-        Log.v("asnkjasj","FILHA DE UMA PUTA");
+    public void list(ArrayList<PontoItem> agenda) {
+        Log.v("asnkjasj", "FILHA DE UMA PUTA");
         PontoItemAdapter adapter = new PontoItemAdapter(this, agenda);
         listView = (ListView) findViewById(R.id.listViewdePontos);
         listView.setAdapter(adapter);
 
     }
-    public void botaoFinalizarCadastroRotaePontos (View v){
-        Log.v("asjdasjkld",Integer.toString(IDCODROTA));
+
+    public void botaoFinalizarCadastroRotaePontos(View v) {
+        Log.v("asjdasjkld", Integer.toString(IDCODROTA));
         EditText eTNomeRota = (EditText) findViewById(R.id.nomeRota);
         EditText eTDescricao = (EditText) findViewById(R.id.descricaoRota);
         String nomeRota = eTNomeRota.getText().toString();
         String descricao = eTDescricao.getText().toString();
+        progressDialog = ProgressDialog.show(FinalizarCadastroRota.this, "Finalizando Rota", "Aguarde");
         Response.Listener<String> responseListener = new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -228,7 +235,8 @@ public class FinalizarCadastroRota extends AppCompatActivity {
                     JSONObject jsonResponse = new JSONObject(response);
                     boolean success = jsonResponse.getBoolean("success");
                     if (success) {
-                        Intent intent = new Intent(getApplicationContext(),Navegacao.class);
+                        progressDialog.cancel();
+                        Intent intent = new Intent(getApplicationContext(), Navegacao.class);
                         startActivity(intent);
                     } else {
                         AlertDialog.Builder builder = new AlertDialog.Builder(FinalizarCadastroRota.this);
@@ -243,7 +251,7 @@ public class FinalizarCadastroRota extends AppCompatActivity {
             }
         };
 
-        UpdateRotaRequest updateRotaRequest = new UpdateRotaRequest(IDCODROTA,nomeRota,descricao,responseListener);
+        UpdateRotaRequest updateRotaRequest = new UpdateRotaRequest(IDCODROTA, nomeRota, descricao, responseListener);
         RequestQueue queue = Volley.newRequestQueue(FinalizarCadastroRota.this);
         queue.add(updateRotaRequest);
 

@@ -1,5 +1,6 @@
 package com.example.justgo.CadastroRota;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.v4.app.FragmentActivity;
@@ -30,7 +31,7 @@ public class AdicionarPontos extends FragmentActivity implements OnMapReadyCallb
     public static RotaAux rota;
     private Conversor c,c2;
     private Double[] pontoLatLng;
-
+    private ProgressDialog progressDialog;
     Polyline polyline;
     private List<LatLng> pontos;
     private List<Polyline> list;
@@ -52,6 +53,7 @@ public class AdicionarPontos extends FragmentActivity implements OnMapReadyCallb
         markers = new ArrayList<Marker>();
         pontos = new ArrayList<LatLng>();
         c2.latLngtoAddress(-19.8986831,-44.0272054);
+
     }
 
     @Override
@@ -59,18 +61,18 @@ public class AdicionarPontos extends FragmentActivity implements OnMapReadyCallb
         mMap = googleMap;
         LatLng origem = new LatLng(rota.getOrigemLat(), rota.getOrigemLng());
         markers.add(mMap.addMarker(new MarkerOptions().position(origem).title("Origem")/*.draggable(true)*/));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(origem));
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(origem,15));
         pontos.add(origem);
         aplicaPolyline();
     }
     public void aplicaPolyline(){
-
         PolylineOptions rectOptions;
         rectOptions = new PolylineOptions();
         for(int i =0;i<pontos.size();i++){
             rectOptions.add(pontos.get(i)).width(5).color(Color.BLUE);
             //Log.v("as",pontos.get(i).toString());
         }
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(pontos.get(pontos.size()-1),14));
         list.add(mMap.addPolyline(rectOptions));
     }
     public void botaoRemovePonto(View v){
@@ -87,7 +89,9 @@ public class AdicionarPontos extends FragmentActivity implements OnMapReadyCallb
 
     public void botaoAddPonto(View v){
         String addressPonto = etPonto.getText().toString();
+        progressDialog = ProgressDialog.show(AdicionarPontos.this,"Adicionando Ponto","Aguarde");
         pontoLatLng = c.addressToLatLng(addressPonto);
+        progressDialog.cancel();
         LatLng ponto = new LatLng(pontoLatLng[0],pontoLatLng[1]);
         markers.add(mMap.addMarker(new MarkerOptions().position(ponto).title("Origem")/*.draggable(true)*/));
         pontos.add(ponto);

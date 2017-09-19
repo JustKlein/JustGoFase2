@@ -19,6 +19,7 @@ import static com.example.justgo.R.id.origem;
  */
 
 public class Conversor {
+    private boolean teste = false;
     private Geocoder geocoder;
     private List<Address> list;
     private String error = "",resultAddress="",resultAddress2="";
@@ -78,20 +79,27 @@ public class Conversor {
         return a;
     }
     public Double[] addressToLatLng(String address){
-
+        teste = true;
         Double[] array = new Double[2];
         resultAddress = "";
         resultAddress2="";
-
-        try {
-            list = (ArrayList<Address>) geocoder.getFromLocationName(address, 1);
-        } catch (IOException e) {
-            e.printStackTrace();
-            error = "Network problem";
-        } catch (IllegalArgumentException e) {
-            e.printStackTrace();
-            error = "Illegal arguments";
-        }
+        do {
+            try {
+                list = (ArrayList<Address>) geocoder.getFromLocationName(address, 1);
+                teste =false;
+            } catch (IOException e) {
+                teste = true;
+                e.printStackTrace();
+                error = "Network problem";
+            } catch (IllegalArgumentException e) {
+                teste=true;
+                e.printStackTrace();
+                error = "Illegal arguments";
+            }
+            if(list == null || !(list.size()>0)){
+                teste = true;
+            }
+        }while(teste);
         if (list != null && list.size() > 0) {
             Address a = list.get(0);
             resultAddress += a.getLatitude();
@@ -100,6 +108,8 @@ public class Conversor {
             resultAddress = error;
             //  resultAddress2 = 0.0;
         }
+
+
         array[0] = Double.parseDouble(resultAddress);
         array[1] = Double.parseDouble(resultAddress2);
         Log.v("askjaskls",resultAddress);
