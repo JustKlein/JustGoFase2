@@ -87,7 +87,7 @@ public class Experiencia3Fragment extends Fragment {
                                         int CodRota =json.getJSONArray(j).getInt(0);
                                         String nomeRota = json.getJSONArray(j).getString(1);
                                         System.out.println(nomeRota);
-                                        rotaItem.add(new RotaItem(nomeRota,null,null,CodRota));
+                                        rotaItem.add(new RotaItem(nomeRota,CodRota));
                                     }
                                     progressDialog.cancel();
                                 }

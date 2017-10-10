@@ -1,116 +1,122 @@
 package com.example.justgo.CadastroRota;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
 
-import com.example.justgo.Mapa.Conversor;
+import com.example.justgo.LogineCadastro.UsuarioLogadoSingleton;
 import com.example.justgo.R;
+import com.google.android.gms.common.api.Status;
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.ui.PlaceAutocompleteFragment;
+import com.google.android.gms.location.places.ui.PlaceSelectionListener;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
-import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
+
+import java.util.ArrayList;
 
 
 public class NovaRota extends FragmentActivity implements OnMapReadyCallback {
-
     private GoogleMap mMap;
-    private EditText origem, destino;
-    private Conversor c;
-    private Double[] arraydeTeste;
-    private Double[] arrayOrigem;
-    private Double[] arrayDestino;
-    public static RotaAux origemDestino;
+    private ArrayList<Place> places;
     PolylineOptions rectOptions;
-
+    BitmapDescriptor icon;
+    PlaceAutocompleteFragment autocompleteFragment;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nova_rota);
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-        origem = (EditText) findViewById(R.id.origem);
-        destino = (EditText) findViewById(R.id.destino);
-
-        c = new Conversor(getApplicationContext());
-        arrayOrigem = new Double[2];
-        arrayDestino = new Double[2];
-        arraydeTeste = new Double[2];
+        places = new ArrayList<Place>();
         rectOptions = new PolylineOptions();
+        icon = BitmapDescriptorFactory.fromResource(R.drawable.ponto_no_mapa);
+        autocompleteFragment = (PlaceAutocompleteFragment)
+                getFragmentManager().findFragmentById(R.id.place_autocomplete_fragment);
 
+
+        autocompleteFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
+            @Override
+            public void onPlaceSelected(Place place) {
+                // TODO: obter informações sobre o local selecionado.
+                Log.i("QQ", "Place: " + place.getName());
+
+                adicionarPonto(place);
+
+            }
+
+            @Override
+            public void onError(Status status) {
+                // TODO: Solucionar o erro.
+                Log.i("QQ", "Ocorreu um erro: " + status);
+            }
+        });
     }
 
-    public void BuscarOrigemDestino(View v) {
-        if (origem != null && destino != null) {
-            String addressOrigem = origem.getText().toString();
-            String addressDestino = destino.getText().toString();
-            arraydeTeste = c.addressToLatLng("Rua vergara 755");
-            arrayOrigem = c.addressToLatLng(addressOrigem);
-            Log.v("LATITUDE", arrayOrigem[0].toString());
-            Log.v("LONGITUDE", arrayOrigem[1].toString());
-            arrayDestino = c.addressToLatLng(addressDestino);
-            Log.v("LATITUDE", arrayDestino[0].toString());
-            Log.v("LONGITUDE", arrayDestino[1].toString());
-            // Add a marker in Sydney and move the camera
-            LatLng sydney = new LatLng(arrayOrigem[0], arrayOrigem[1]);
-            mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-            rectOptions.add(sydney);
-            sydney = new LatLng(arrayDestino[0], arrayDestino[1]);
-            rectOptions.add(sydney);
-            BitmapDescriptor icon = BitmapDescriptorFactory.fromResource(R.drawable.marker);
-            mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney").icon(icon));
-
-            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(sydney,12));
-            Polyline polyline = mMap.addPolyline(rectOptions);
+    public void adicionarPonto(Place place){
+        autocompleteFragment.setText("");
+        mMap.addMarker(new MarkerOptions().position(place.getLatLng()));
+        places.add(place);
+        aplicaPolyline();
+    }
+    public void voltarPonto(View view){
+        if(places.size()>0) {
+            Log.v("antes",Integer.toString(places.size()-1));
+            places.remove(places.size() - 1);
+            Log.v("depois",Integer.toString(places.size()-1));
+            aplicaPolyline();
+        }
+        else{
+            if (places.size()==0){
+                places.clear();
+            }
         }
     }
-    public void ConfirmarOrigemDestino(View v){
-        if(arrayDestino != null && arrayOrigem!=null){
-        String addressOrigem = origem.getText().toString();
-        String addressDestino = destino.getText().toString();
-        arrayOrigem = c.addressToLatLng(addressOrigem);
-        Log.v("LATITUDE",arrayOrigem[0].toString());
-        Log.v("LONGITUDE",arrayOrigem[1].toString());
-        arrayDestino = c.addressToLatLng(addressDestino);
-        Log.v("LATITUDE",arrayDestino[0].toString());
-        Log.v("LONGITUDE",arrayDestino[1].toString());
+    public void aplicaPolyline(){
+        mMap.clear();
+        if(places.size()>0) {
+            PolylineOptions rectOptions;
+            rectOptions = new PolylineOptions();
+            Log.v("Aplica", Integer.toString(places.size() - 1));
+            for (int i = 0; i < places.size(); i++) {
+                rectOptions.add(places.get(i).getLatLng()).width(5).color(Color.BLUE);
+                mMap.addMarker(new MarkerOptions().position(places.get(i).getLatLng()).icon(icon));
+            }
+            mMap.addPolyline(rectOptions);
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(places.get(places.size() - 1).getLatLng(), 14));
+        }
+    }
+    public void confirmarRota(View view){
+        if(!places.isEmpty()) {
+            UsuarioLogadoSingleton usuarioLogado = UsuarioLogadoSingleton.getInstancia();
+
+            CadastrodeRota cadastrarRota = new CadastrodeRota();
+            try {
+                cadastrarRota.cadastrarnaTabelaRota(usuarioLogado.getEmail(), places, getApplicationContext());
+                Thread.sleep(2000);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
 
 
-            origemDestino = new RotaAux();
-            origemDestino.setOrigemLat(arrayOrigem[0]);
-            origemDestino.setOrigemLng(arrayOrigem[1]);
-            origemDestino.setDestinoLat(arrayDestino[0]);
-            origemDestino.setDestinoLng(arrayDestino[1]);
-            Intent intent = new Intent(this,AdicionarPontos.class);
+
+            Intent intent = new Intent(NovaRota.this, FinalizarCadastroRota.class);
             startActivity(intent);
         }
-
+        //Log.v("FUNCIONOU",Integer.toString(rotaSingleton.getCodRota()));
     }
-    /**
-     * Manipulates the map once available.
-     * This callback is triggered when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
-     * If Google Play services is not installed on the device, the user will be prompted to install
-     * it inside the SupportMapFragment. This method will only be triggered once the user has
-     * installed Google Play services and returned to the app.
-     */
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-
-        // Add a marker in Sydney and move the camera
-
     }
 }

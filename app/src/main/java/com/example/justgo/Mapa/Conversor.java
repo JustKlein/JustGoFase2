@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.Locale;
 
 import static android.R.id.list;
-import static com.example.justgo.R.id.origem;
 
 /**
  * Created by Keven on 8/16/2017.

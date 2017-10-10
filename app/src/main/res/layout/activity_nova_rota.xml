@@ -13,35 +13,55 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_margin="10dp"
         android:padding="3dp"
         android:gravity="center"
         android:background="@drawable/borda">
-        <EditText
-            android:layout_width="100dp"
+        <fragment
+            android:id="@+id/place_autocomplete_fragment"
+            android:layout_width="306dp"
             android:layout_height="wrap_content"
-            android:hint="@string/origem"
-            android:id="@+id/origem"
-            android:layout_margin="2dp"/>
+            android:name="com.google.android.gms.location.places.ui.PlaceAutocompleteFragment"
+            />
+        <!--<EditText-->
+            <!--android:layout_width="100dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:hint="@string/origem"-->
+            <!--android:id="@+id/origem"-->
+            <!--android:layout_margin="2dp"/>-->
 
-        <EditText
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:hint="@string/destino"
-            android:id="@+id/destino"
-            android:layout_margin="2dp"/>
+        <!--<EditText-->
+            <!--android:layout_width="100dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:hint="@string/destino"-->
+            <!--android:id="@+id/destino"-->
+            <!--android:layout_margin="2dp"/>-->
 
-        <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:src="@drawable/ic_visualizar"
-            android:onClick="BuscarOrigemDestino"/>
+        <!--<ImageView-->
+            <!--android:layout_width="50dp"-->
+            <!--android:layout_height="50dp"-->
+            <!--android:src="@drawable/ic_visualizar"-->
+            <!--android:onClick="BuscarOrigemDestino"/>-->
 
         <ImageView
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:src="@drawable/ic_avancar"
-            android:onClick="ConfirmarOrigemDestino"/>
+            android:onClick="confirmarRota"/>
 
     </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/voltar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:onClick="voltarPonto"
+            android:text="Voltar Ponto" />
+    </RelativeLayout>
+
 </FrameLayout>

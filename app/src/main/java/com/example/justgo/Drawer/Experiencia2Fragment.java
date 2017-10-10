@@ -52,17 +52,17 @@ public class Experiencia2Fragment extends Fragment {
         bTPesquisa = (Button) view.findViewById(R.id.botaoPesquisar);
         conversor = new Conversor(getContext());
         rotaItem = new ArrayList<RotaItem>();
-        bTPesquisa.setOnClickListener(new View.OnClickListener() {
+        /*bTPesquisa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 rotaItem.clear();
                 pesquisar();
             }
-        });
+        });*/
         return view;
     }
 
-    public void pesquisar() {
+  /*  public void pesquisar() {
         String pesquisa = eTPesquisa.getText().toString();
         progressDialog = ProgressDialog.show(getContext(), "Pesquisando", "Aguarde");
         Response.Listener<String> responseListener = new Response.Listener<String>() {
@@ -108,7 +108,7 @@ public class Experiencia2Fragment extends Fragment {
         PesquisaRequest pesquisaRequest = new PesquisaRequest(pesquisa, responseListener);
         RequestQueue queue = Volley.newRequestQueue(getContext());
         queue.add(pesquisaRequest);
-    }
+    }*/
 
     public void list(ArrayList<RotaItem> agenda) {
         Log.v("asnkjasj", "FILHA DE UMA PUTA");

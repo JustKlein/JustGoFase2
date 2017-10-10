@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.example.justgo.CadastroRota.PontoItem;
 import com.example.justgo.Mapa.Conversor;
 import com.example.justgo.R;
+import com.example.justgo.logger.Log;
 
 import java.util.ArrayList;
 
@@ -37,15 +38,15 @@ public class TrechoItemAdapter extends ArrayAdapter<TrechoItem> {
 
         TextView descricao = (TextView) listItemView.findViewById(R.id.descricao);
         descricao.setText(currentAndroid.getDescricao());
-
+        android.util.Log.v("Descricao",currentAndroid.getDescricao());
         TextView origem = (TextView) listItemView.findViewById(R.id.origem2);
-        origem.setText(conversor.latLngtoAddress(currentAndroid.getOrigem().latitude,currentAndroid.getOrigem().longitude));
-
+        origem.setText(currentAndroid.getOrigem());
+        android.util.Log.v("Descricao",currentAndroid.getDestino());
         TextView destino = (TextView) listItemView.findViewById(R.id.destino2);
-        destino.setText(conversor.latLngtoAddress(currentAndroid.getDestino().latitude,currentAndroid.getDestino().longitude));
+        destino.setText(currentAndroid.getDestino());
 
         TextView tempo = (TextView) listItemView.findViewById(R.id.tempo);
-        tempo.setText(currentAndroid.getTempo());
+        tempo.setText(Double.toString(currentAndroid.getTempo()));
 
         TextView preco = (TextView) listItemView.findViewById(R.id.preco);
         preco.setText(Double.toString(currentAndroid.getPreco()));

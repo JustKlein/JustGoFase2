@@ -113,11 +113,13 @@ public class MapsHome extends FragmentActivity implements OnMapReadyCallback, Go
                                     JSONArray json = jsonResponse.getJSONArray(i);
                                     System.out.println(json.length());
                                     for (int j = 0; j < json.length(); j++) {
-                                        rectOptions.add(new LatLng(json.getJSONArray(j).getDouble(2), json.getJSONArray(j).getDouble(3))).width(5);
+                                      /*  rectOptions.add(new LatLng(json.getJSONArray(j).getDouble(2), json.getJSONArray(j).getDouble(3))).width(5);
                                         rectOptions.add(new LatLng(json.getJSONArray(j).getDouble(2), json.getJSONArray(j).getDouble(3)));
-                                        rectOptions.add(new LatLng(json.getJSONArray(j).getDouble(2), json.getJSONArray(j).getDouble(3)));
+                                        rectOptions.add(new LatLng(json.getJSONArray(j).getDouble(2), json.getJSONArray(j).getDouble(3)));*/
+                                      Log.v("asdasdaas","dasdasdas");
+                                      mMap.addMarker(new MarkerOptions().position(new LatLng(json.getJSONArray(j).getDouble(2),json.getJSONArray(j).getDouble(3))));
                                     }
-                                    mMap.addPolyline(rectOptions);
+                                    //mMap.addPolyline(rectOptions);
                                 }
 
 

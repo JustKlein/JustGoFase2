@@ -11,13 +11,13 @@ import java.util.Map;
  * Created by Keven on 8/23/2017.
  */
 
-public class FinalizarCadastroRotaRequest extends StringRequest{
+public class CadastrarRotaRequest extends StringRequest{
 
         private static final String REGISTER_REQUEST_URL = "http://justgodb.000webhostapp.com/cadastrarRota.php";
         private Map<String, String> params;
 
-        public FinalizarCadastroRotaRequest(String nome, String email, String origemLatitude,String origemLongitude,
-                                            String destinoLatitude, String destinoLongitude, Response.Listener<String> listener) {
+        public CadastrarRotaRequest(String nome, String email, String origemLatitude,String origemLongitude,
+                                            String destinoLatitude, String destinoLongitude,String enderecoOrigem,String enderecoDestino, String placeIDOrigem,String placeIDDestino,String latitudes, String longitudes, String placesIDs,String placesNames, String placesAddress, Response.Listener<String> listener) {
             super(Request.Method.POST, REGISTER_REQUEST_URL, listener, null);
             params = new HashMap<>();
             params.put("emailUsuarioEntrada",email);
@@ -26,6 +26,15 @@ public class FinalizarCadastroRotaRequest extends StringRequest{
             params.put("origemLngEntrada", origemLongitude);
             params.put("destinoLatEntrada", destinoLatitude);
             params.put("destinoLngEntrada", destinoLongitude);
+            params.put("enderecoOrigem",enderecoOrigem);
+            params.put("enderecoDestino",enderecoDestino);
+            params.put("placeIDOrigem",placeIDOrigem);
+            params.put("placeIDDestino",placeIDDestino);
+            params.put("latitudes",latitudes);
+            params.put("longitudes",longitudes);
+            params.put("placesIDS",placesIDs);
+            params.put("placesNames",placesNames);
+            params.put("placesAddress",placesAddress);
         }
 
         @Override

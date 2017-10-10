@@ -6,13 +6,11 @@ package com.example.justgo.Drawer;
 
 public class RotaItem {
 
-    private String origem,destino,nomeRota;
+    private String nomeRota;
     private int codRota;
 
-    public RotaItem(String nomeRota,String origem, String destino, int codRota) {
+    public RotaItem(String nomeRota, int codRota) {
         this.nomeRota = nomeRota;
-        this.origem = origem;
-        this.destino = destino;
         this.codRota = codRota;
     }
 
@@ -22,22 +20,6 @@ public class RotaItem {
 
     public void setNomeRota(String nomeRota) {
         this.nomeRota = nomeRota;
-    }
-
-    public String getOrigem() {
-        return origem;
-    }
-
-    public void setOrigem(String origem) {
-        this.origem = origem;
-    }
-
-    public String getDestino() {
-        return destino;
-    }
-
-    public void setDestino(String destino) {
-        this.destino = destino;
     }
 
     public int getCodRota() {

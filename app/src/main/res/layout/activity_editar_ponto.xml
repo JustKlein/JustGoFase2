@@ -80,6 +80,10 @@
                 android:layout_margin="10dp"
                 android:background="@drawable/borda_botao"
                 android:onClick="botaoConfirmarEditarPonto"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imgfoto"/>
 
         </LinearLayout>
     </LinearLayout>

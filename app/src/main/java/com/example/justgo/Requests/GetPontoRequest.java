@@ -19,7 +19,6 @@ public class GetPontoRequest extends StringRequest {
     public GetPontoRequest(int codRota, Response.Listener<String> listener) {
         super(Method.POST, LOGIN_REQUEST_URL, listener, null);
         params = new HashMap<>();
-        Log.v("AXAMBASK",Integer.toString(codRota));
         params.put("codRotaEntrada", Integer.toString(codRota));
     }
 
