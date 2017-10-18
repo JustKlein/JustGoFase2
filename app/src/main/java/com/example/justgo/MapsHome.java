@@ -118,6 +118,9 @@ public class MapsHome extends FragmentActivity implements OnMapReadyCallback, Go
                                         rectOptions.add(new LatLng(json.getJSONArray(j).getDouble(2), json.getJSONArray(j).getDouble(3)));
                                     }
                                     mMap.addPolyline(rectOptions);
+                                    for(int k =0;k<rectOptions.getPoints().size();k++){
+                                        mMap.addMarker(new MarkerOptions().position(rectOptions.getPoints().get(k)).title("Origem"));
+                                    }
                                 }
 
 
@@ -136,7 +139,7 @@ public class MapsHome extends FragmentActivity implements OnMapReadyCallback, Go
             }
         };
 
-        HomePageRequest homePageRequest = new HomePageRequest(-19.8986831, -44.0293941, responseListener);
+        HomePageRequest homePageRequest = new HomePageRequest(-19.954445, -44.0246759,  responseListener);
         RequestQueue queue = Volley.newRequestQueue(MapsHome.this);
         queue.add(homePageRequest);
     }

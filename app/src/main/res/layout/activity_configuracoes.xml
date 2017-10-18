@@ -6,15 +6,8 @@
     android:layout_height="match_parent"
     tools:context="com.example.justgo.Drawer.Configuracoes">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Configurações"
-        android:textAlignment="center"
-        android:paddingTop="10dp"
-        android:textColor="@color/letra"
-        android:textSize="35dp"
-    />
-    
-
+    <SeekBar
+        android:id="@+id/seekbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 </LinearLayout>

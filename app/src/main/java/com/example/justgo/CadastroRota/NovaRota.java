@@ -69,7 +69,7 @@ public class NovaRota extends FragmentActivity implements OnMapReadyCallback {
             sydney = new LatLng(arrayDestino[0], arrayDestino[1]);
             rectOptions.add(sydney);
             BitmapDescriptor icon = BitmapDescriptorFactory.fromResource(R.drawable.marker);
-            mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney").icon(icon));
+            mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
 
             mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(sydney,12));
             Polyline polyline = mMap.addPolyline(rectOptions);

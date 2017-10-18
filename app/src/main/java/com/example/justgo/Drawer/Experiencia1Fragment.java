@@ -110,7 +110,7 @@ public class Experiencia1Fragment extends Fragment {
             }
 
         };
-
+        progressDialog.cancel();
         GetRotasdoUsuarioRequest getPontoRequest = new GetRotasdoUsuarioRequest(usuarioLogado.getUsuario(), responseListener);
         RequestQueue queue = Volley.newRequestQueue(getContext());
         queue.add(getPontoRequest);

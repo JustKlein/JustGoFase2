@@ -9,9 +9,16 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:padding="20dp"
         android:gravity="center">
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/letra"
+            android:textSize="15dp"
+            android:textAlignment="center"
+            android:layout_margin="5dp"
+            android:text="@string/textoEditarPonto"/>
         <EditText
             android:layout_width="320dp"
             android:layout_height="40dp"
@@ -80,6 +87,7 @@
                 android:layout_margin="10dp"
                 android:background="@drawable/borda_botao"
                 android:onClick="botaoConfirmarEditarPonto"/>
+
 
         </LinearLayout>
     </LinearLayout>

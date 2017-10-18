@@ -13,10 +13,13 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
                 android:text="@string/descricao2"
                 android:textSize="20dp"
+                android:textStyle="bold"
+                android:layout_gravity="center"
                 android:textColor="@color/letra"/>
 
             <TextView
@@ -24,6 +27,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="20dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginTop="5dp"
+                android:layout_gravity="center"
                 android:textColor="@color/letra"/>
         </LinearLayout>
 
@@ -33,10 +39,13 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/origem2"
+                android:textStyle="bold"
+                android:layout_gravity="center"
                 android:textSize="20dp"
+                android:layout_marginTop="5dp"
                 android:textColor="@color/letra"/>
 
             <TextView
@@ -44,6 +53,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="20dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginTop="5dp"
+                android:layout_gravity="center"
                 android:textColor="@color/letra"/>
         </LinearLayout>
 
@@ -53,10 +65,13 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/destino2"
+                android:textStyle="bold"
+                android:layout_gravity="center"
                 android:textSize="20dp"
+                android:layout_marginTop="5dp"
                 android:textColor="@color/letra"/>
 
             <TextView
@@ -64,6 +79,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="20dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginTop="5dp"
+                android:layout_gravity="center"
                 android:textColor="@color/letra"/>
         </LinearLayout>
 
@@ -73,9 +91,12 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/tempo2"
+                android:textStyle="bold"
+                android:layout_marginTop="5dp"
+                android:layout_gravity="center"
                 android:textSize="20dp"
                 android:textColor="@color/letra"/>
 
@@ -84,6 +105,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="20dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginTop="5dp"
+                android:layout_gravity="center"
                 android:textColor="@color/letra"/>
         </LinearLayout>
 
@@ -93,9 +117,12 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/gasto2"
+                android:textStyle="bold"
+                android:layout_marginTop="5dp"
+                android:layout_gravity="center"
                 android:textSize="20dp"
                 android:textColor="@color/letra"/>
 
@@ -104,6 +131,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="20dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginTop="5dp"
+                android:layout_gravity="center"
                 android:textColor="@color/letra"/>
         </LinearLayout>
 
@@ -113,9 +143,12 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/meioDeTransporte2"
+                android:textStyle="bold"
+                android:layout_marginTop="5dp"
+                android:layout_gravity="center"
                 android:textSize="20dp"
                 android:textColor="@color/letra"/>
 
@@ -124,6 +157,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="20dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginTop="5dp"
+                android:layout_gravity="center"
                 android:textColor="@color/letra"/>
         </LinearLayout>
     </LinearLayout>

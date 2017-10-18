@@ -70,13 +70,8 @@ public class FinalizarCadastroRota extends AppCompatActivity {
                     final int idRota = jsonResponse.getInt("id") - 1;
                     //Log.v("assaasa",Integer.toString(idRota));
                     if (success) {
-                        AlertDialog.Builder builder = new AlertDialog.Builder(FinalizarCadastroRota.this);
-                        builder.setMessage("Usuário cadastrado com sucesso")
-                                .setNegativeButton("Ok", null)
-                                .create()
-                                .show();
                         Log.v("PONTOS", Integer.toString(pontosEntrada.size()));
-                        progressDialog = ProgressDialog.show(FinalizarCadastroRota.this, "CadastrandoPontos", "Aguarde");
+                        progressDialog = ProgressDialog.show(FinalizarCadastroRota.this, "Carregando Pontos", "Aguarde");
                         for (int i = 0; i < pontosEntrada.size(); i++) {
                             cadastrarPontosnoBD(idRota, pontosEntrada.get(i).latitude, pontosEntrada.get(i).longitude, i + 1);
                         }
@@ -85,7 +80,7 @@ public class FinalizarCadastroRota extends AppCompatActivity {
 
                     } else {
                         AlertDialog.Builder builder = new AlertDialog.Builder(FinalizarCadastroRota.this);
-                        builder.setMessage("Erro ao cadastrar usuário")
+                        builder.setMessage("Erro ao cadastrar rota")
                                 .setNegativeButton("Tentar novamente", null)
                                 .create()
                                 .show();
@@ -114,7 +109,7 @@ public class FinalizarCadastroRota extends AppCompatActivity {
                         Log.v("ENTOU", "EEE");
                     } else {
                         AlertDialog.Builder builder = new AlertDialog.Builder(FinalizarCadastroRota.this);
-                        builder.setMessage("Erro ao cadastrar usuário")
+                        builder.setMessage("Erro ao cadastrar rota")
                                 .setNegativeButton("Tentar novamente", null)
                                 .create()
                                 .show();
@@ -142,14 +137,7 @@ public class FinalizarCadastroRota extends AppCompatActivity {
                         String id = jsonResponse.getString("idResposta");
                         Log.v("ID", id);
                         editarPontos(Integer.parseInt(id));
-                    } else {
-                        AlertDialog.Builder builder = new AlertDialog.Builder(FinalizarCadastroRota.this);
-                        builder.setMessage("Não foi possível efetuar o Login")
-                                .setNegativeButton("Tentar Novamente", null)
-                                .create()
-                                .show();
                     }
-
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

@@ -32,12 +32,14 @@ public class Experiencias extends AppCompatActivity {
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabLayout);
         tabLayout.setupWithViewPager(viewPager);
+
+        getSupportActionBar().setElevation(0);
     }
 
     public void setupViewPager(ViewPager viewPager)
     {
         Secoes adaptador = new Secoes(getSupportFragmentManager());
-        adaptador.adicionaFragmento(new Experiencia1Fragment(), "Minhas Experiencias");
+        adaptador.adicionaFragmento(new Experiencia1Fragment(), "Minhas Experiências");
         adaptador.adicionaFragmento(new Experiencia2Fragment(),"Pesquisar Experiências");
         adaptador.adicionaFragmento(new Experiencia3Fragment(),"Sugestões de Lugares");
         viewPager.setAdapter(adaptador);

@@ -1,4 +1,4 @@
-package com.example.justgo.Drawer;
+        package com.example.justgo.Drawer;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -83,7 +83,6 @@ public class Experiencia2Fragment extends Fragment {
 
                         rotaItem.add(new RotaItem(nomeRota, origem.getSubLocality(), destino.getSubLocality(), codRota));
                     }
-
                     list(rotaItem);
                     progressDialog.cancel();
                     listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

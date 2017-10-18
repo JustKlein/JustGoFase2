@@ -175,7 +175,7 @@ public class Navegacao extends AppCompatActivity
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        progressDialog = ProgressDialog.show(Navegacao.this, "CarregandoPontos", "Aguarde");
+      //  progressDialog = ProgressDialog.show(Navegacao.this, "CarregandoPontos", "Aguarde");
         Response.Listener<String> responseListener = new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -204,8 +204,11 @@ public class Navegacao extends AppCompatActivity
                                         rectOptions.add(new LatLng(json.getJSONArray(j).getDouble(2), json.getJSONArray(j).getDouble(3)));
 
                                     }
-                                    progressDialog.cancel();
+        //                            progressDialog.cancel();
                                     mMap.addPolyline(rectOptions);
+                                    for(int k =0;k<rectOptions.getPoints().size();k++){
+                                        mMap.addMarker(new MarkerOptions().position(rectOptions.getPoints().get(k)).title("Origem"));
+                                    }
                                 }
 
 
@@ -224,11 +227,11 @@ public class Navegacao extends AppCompatActivity
             }
         };
 
-        HomePageRequest homePageRequest = new HomePageRequest(-19.8986831, -44.0293941, responseListener);
+        HomePageRequest homePageRequest = new HomePageRequest(-19.8986831,  -44.0272054, responseListener);
         RequestQueue queue = Volley.newRequestQueue(Navegacao.this);
         queue.add(homePageRequest);
 
-    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(-19.8986831, -44.0293941),8));
+    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(-19.8986831, -44.0293941),12));
 
     }
 
