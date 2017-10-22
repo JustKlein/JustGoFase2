@@ -13,10 +13,11 @@ public class RotaSingleton {
     private  int codRota;
     protected String email;
     protected ArrayList<Place> places;
+    protected ArrayList<Integer> positions;
     public static RotaSingleton instancia;
 
     protected RotaSingleton(){
-
+        positions = new ArrayList<Integer>();
     }
     public static RotaSingleton getInstancia(){
         if(instancia ==null) {
@@ -52,5 +53,13 @@ public class RotaSingleton {
 
     public void setPlaces(ArrayList<Place> places) {
         this.places = places;
+    }
+
+    public ArrayList<Integer> getPositions() {
+        return positions;
+    }
+
+    public void setPositions(ArrayList<Integer> positions) {
+        this.positions = positions;
     }
 }

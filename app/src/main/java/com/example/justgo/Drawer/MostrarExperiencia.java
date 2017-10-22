@@ -1,5 +1,7 @@
 package com.example.justgo.Drawer;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.DataSetObserver;
 import android.support.v7.app.ActionBar;
@@ -19,12 +21,14 @@ import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
 import com.example.justgo.Mapa.Conversor;
 import com.example.justgo.R;
+import com.example.justgo.Requests.ExcluirRota;
 import com.example.justgo.Requests.Experiencia.GetCaracteristicasPontoRequest;
 import com.example.justgo.Requests.Experiencia.GetRotaRequest;
 import com.google.android.gms.maps.model.LatLng;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -202,7 +206,39 @@ public class MostrarExperiencia extends AppCompatActivity {
     }
     public void verMapaMostrarExeperiencia(View v){
         Intent intent = new Intent(MostrarExperiencia.this, MapaMostratExperiencia.class);
-            intent.putExtra("trecho", codRota);
+        intent.putExtra("trecho", codRota);
         startActivity(intent);
+    }
+    public void excluirRota(View v){
+        AlertDialog.Builder builder = new AlertDialog.Builder(MostrarExperiencia.this);
+        builder.setMessage("Você tem certeza que deseja excluir essa rota?")
+                .setNegativeButton("Não", null)
+                .setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Response.Listener<String> responseListener = new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+                                try {
+                                    JSONObject jsonResponse = new JSONObject(response);
+                                    Boolean success = jsonResponse.getBoolean("success");
+                                    if(success)
+                                    {
+                                        MostrarExperiencia.super.onBackPressed();
+                                    }
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        };
+
+                        ExcluirRota excluirRota = new ExcluirRota(codRota, responseListener);
+                        RequestQueue queue = Volley.newRequestQueue(MostrarExperiencia.this);
+                        queue.add(excluirRota);
+                    }
+                })
+                .create()
+                .show();
+
     }
 }

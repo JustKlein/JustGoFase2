@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 
 import com.example.justgo.LogineCadastro.UsuarioLogadoSingleton;
 import com.example.justgo.R;
@@ -30,6 +31,7 @@ public class NovaRota extends FragmentActivity implements OnMapReadyCallback {
     private ArrayList<Place> places;
     PolylineOptions rectOptions;
     BitmapDescriptor icon;
+    EditText ed;
     PlaceAutocompleteFragment autocompleteFragment;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,16 +45,14 @@ public class NovaRota extends FragmentActivity implements OnMapReadyCallback {
         icon = BitmapDescriptorFactory.fromResource(R.drawable.ponto_no_mapa);
         autocompleteFragment = (PlaceAutocompleteFragment)
                 getFragmentManager().findFragmentById(R.id.place_autocomplete_fragment);
-
-
+        ed = (EditText) findViewById(R.id.autocomplete_places);
+        autocompleteFragment.setHint("Digite um ponto da rota");
         autocompleteFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
             @Override
             public void onPlaceSelected(Place place) {
                 // TODO: obter informações sobre o local selecionado.
                 Log.i("QQ", "Place: " + place.getName());
-
                 adicionarPonto(place);
-
             }
 
             @Override
@@ -64,7 +64,7 @@ public class NovaRota extends FragmentActivity implements OnMapReadyCallback {
     }
 
     public void adicionarPonto(Place place){
-        autocompleteFragment.setText("");
+
         mMap.addMarker(new MarkerOptions().position(place.getLatLng()));
         places.add(place);
         aplicaPolyline();

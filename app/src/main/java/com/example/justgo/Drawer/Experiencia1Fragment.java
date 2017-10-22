@@ -50,13 +50,18 @@ public class Experiencia1Fragment extends Fragment {
          conversor = new Conversor(getContext());
         rotaItem = new ArrayList<RotaItem>();
         rotaItem.clear();
+        progressDialog = ProgressDialog.show(getContext(), "CarregandoPontos", "Aguarde");
         editarPontos();
         return view;
+    }
+    @Override
+    public void onResume(){
+        super.onResume();
+        editarPontos();
     }
 
     public void editarPontos() {
         rotaItem.clear();
-        progressDialog = ProgressDialog.show(getContext(), "CarregandoPontos", "Aguarde");
         Response.Listener<String> responseListener = new Response.Listener<String>() {
             @Override
             public void onResponse(final String response) {

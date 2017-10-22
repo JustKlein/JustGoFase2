@@ -9,6 +9,7 @@ import com.google.android.gms.maps.model.LatLng;
 public class PontoItem {
     private String origem,destino;
     private int codPonto;
+    private boolean foiAdicionado;
 
     public int getCodPonto() {
         return codPonto;
@@ -22,6 +23,14 @@ public class PontoItem {
         this.origem = origem;
         this.destino = destino;
         this.codPonto = codPonto;
+    }
+
+    public boolean isFoiAdicionado() {
+        return foiAdicionado;
+    }
+
+    public void setFoiAdicionado(boolean foiAdicionado) {
+        this.foiAdicionado = foiAdicionado;
     }
 
     public String getOrigem() {

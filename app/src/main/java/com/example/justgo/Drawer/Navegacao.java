@@ -324,11 +324,9 @@ mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(-19.8986831, -44.02
                 }
             }
         };
-
         GetPontosHomePageRequest getPontoRequest = new GetPontosHomePageRequest(converterArraytoString(pontosSolicitados), responseListener);
         RequestQueue queue = Volley.newRequestQueue(Navegacao.this);
         queue.add(getPontoRequest);
 
     }
-
 }

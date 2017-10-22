@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -40,16 +41,30 @@ public class FinalizarCadastroRota extends AppCompatActivity {
     ListView listView;
     PontoItemAdapter adapter;
     ProgressDialog progressDialog;
-    ArrayList<PontoItem> pontoItem;
+    ArrayList<PontoItem> pontoItem;RotaSingleton rotaSingleton;
     private static int COD_PONTO = 0, PLACE_NOME = 6;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_finalizar_cadastro_rota);
-        RotaSingleton rotaSingleton = RotaSingleton.getInstancia();
+        rotaSingleton = RotaSingleton.getInstancia();
         Log.v("OI",Integer.toString(rotaSingleton.getCodRota()));
         pontoItem = new ArrayList<PontoItem>();
         editarPontos();
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+        Log.v("asddddasdasd","aaaaaaaaaa");
+        if(requestCode == 1) {
+            if (resultCode == RESULT_OK) {
+                int position = data.getIntExtra("Resposta",-1);
+                rotaSingleton.positions.add(position);
+                //adapter.setmSelectedItem();
+                adapter.notifyDataSetChanged();
+                Log.v("DEU CERTO", Integer.toString(position));
+        }
+        }
+        super.onActivityResult(requestCode,resultCode,data);
     }
     public void editarPontos() {
 
@@ -81,7 +96,8 @@ public class FinalizarCadastroRota extends AppCompatActivity {
                                 intent.putExtra("codPonto", jsonResponse.getJSONArray(position).getInt(COD_PONTO));
                                 intent.putExtra("origem",pontoItem.get(position).getOrigem());
                                 intent.putExtra("destino", pontoItem.get(position).getDestino());
-                                startActivity(intent);
+                                intent.putExtra("posicao",position);
+                                startActivityForResult(intent,1);
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
@@ -102,7 +118,7 @@ public class FinalizarCadastroRota extends AppCompatActivity {
         queue.add(getPontoRequest);
     }
     public void list(ArrayList<PontoItem> agenda){
-        PontoItemAdapter adapter = new PontoItemAdapter(this, agenda);
+        adapter = new PontoItemAdapter(this, agenda);
         listView = (ListView) findViewById(R.id.listViewdePontos);
         listView.setAdapter(adapter);
     }

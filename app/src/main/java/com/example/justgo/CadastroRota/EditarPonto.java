@@ -42,7 +42,7 @@ public class EditarPonto extends AppCompatActivity implements AdapterView.OnItem
     private String selectedImagePath;
     ProgressDialog progressDialog;
     private EditText eTDescricao,eTTempo,eTPreco;
-    private int codRota, codPonto,nroPonto;
+    private int codRota, codPonto,nroPonto,position;
     ImageView iV;
     Spinner spin;
     Spinner combo;
@@ -65,6 +65,7 @@ public class EditarPonto extends AppCompatActivity implements AdapterView.OnItem
         codPonto = bundle.getInt("codPonto");
         origem =  bundle.getString("origem");
     destino = bundle.getString("destino");
+        position = bundle.getInt("posicao");
     eTDescricao = (EditText) findViewById(R.id.descricaoPonto);
     eTTempo = (EditText) findViewById(R.id.tempoPonto);
     eTPreco = (EditText) findViewById(R.id.precoPonto);
@@ -112,11 +113,10 @@ rotaSingleton = RotaSingleton.getInstancia();
                     JSONObject jsonResponse = new JSONObject(response);
                     boolean success = jsonResponse.getBoolean("success");
                     if (success) {
-                        AlertDialog.Builder builder = new AlertDialog.Builder(EditarPonto.this);
-                        builder.setMessage("Usuário cadastrado com sucesso")
-                                .setNegativeButton("Ok", null)
-                                .create()
-                                .show();
+                        Intent it = new Intent();
+                        it.putExtra("Resposta",position);
+                        setResult(RESULT_OK,it);
+                        EditarPonto.super.onBackPressed();
                     } else {
                         AlertDialog.Builder builder = new AlertDialog.Builder(EditarPonto.this);
                         builder.setMessage("Erro ao cadastrar usuário")
