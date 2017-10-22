@@ -11,7 +11,6 @@ import com.example.justgo.Drawer.Navegacao;
 import com.example.justgo.LogineCadastro.LoginActivity;
 import com.example.justgo.LogineCadastro.RegisterActivity;
 
-import static com.example.justgo.LogineCadastro.LoginActivity.usuarioLogado;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -19,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        SharedPreferences shared = getPreferences(Context.MODE_PRIVATE);
+       /* SharedPreferences shared = getPreferences(Context.MODE_PRIVATE);
         String logado = shared.getString("Usuario", "");
         System.out.println(logado);
         if (!logado.isEmpty()) {
@@ -31,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         else{
             System.out.print("EU NAO SEU FAZR ISSO" );
         }
-
+*/
     }
     public void onClickfazerLoginMainActivity(View v){
         System.out.print("adskajskldaskljasjdskla" );

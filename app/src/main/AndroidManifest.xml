@@ -109,7 +109,9 @@
         <activity android:name=".Sobre" />
         <activity
             android:name=".Drawer.MapaMostratExperiencia"
-            android:label="@string/title_activity_mapa_mostrat_experiencia"></activity>
+            android:label="@string/title_activity_mapa_mostrat_experiencia" />
+        <activity android:name=".TestedoAutoComplete" />
+        <activity android:name=".logger.SampleActivityBase"></activity>
     </application>
 
 </manifest>

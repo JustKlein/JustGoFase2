@@ -8,7 +8,8 @@ import com.google.android.gms.maps.model.LatLng;
 
 public class PontoItem {
     private String origem,destino;
-    private int nroPonto,codRota,codPonto;
+    private int codPonto;
+    private boolean foiAdicionado;
 
     public int getCodPonto() {
         return codPonto;
@@ -18,12 +19,18 @@ public class PontoItem {
         this.codPonto = codPonto;
     }
 
-    public PontoItem(int codPonto, int nroPonto, String origem, String destino, int codRota) {
+    public PontoItem(int codPonto, String origem, String destino) {
         this.origem = origem;
         this.destino = destino;
-        this.nroPonto = nroPonto;
-        this.codRota = codRota;
         this.codPonto = codPonto;
+    }
+
+    public boolean isFoiAdicionado() {
+        return foiAdicionado;
+    }
+
+    public void setFoiAdicionado(boolean foiAdicionado) {
+        this.foiAdicionado = foiAdicionado;
     }
 
     public String getOrigem() {
@@ -41,22 +48,5 @@ public class PontoItem {
     public void setDestino(String destino) {
         this.destino = destino;
     }
-
-    public int getNroPonto() {
-        return nroPonto;
-    }
-
-    public void setNroPonto(int codPonto) {
-        this.nroPonto = nroPonto;
-    }
-
-    public int getCodRota() {
-        return codRota;
-    }
-
-    public void setCodRota(int codRota) {
-        this.codRota = codRota;
-    }
-
 
 }

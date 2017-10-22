@@ -62,7 +62,7 @@ public class Experiencia2Fragment extends Fragment {
         return view;
     }
 
-    public void pesquisar() {
+  public void pesquisar() {
         String pesquisa = eTPesquisa.getText().toString();
         progressDialog = ProgressDialog.show(getContext(), "Pesquisando", "Aguarde");
         Response.Listener<String> responseListener = new Response.Listener<String>() {
@@ -72,16 +72,10 @@ public class Experiencia2Fragment extends Fragment {
                     final JSONArray jsonResponse = new JSONArray(response);
 
                     for (int i = 0; i < jsonResponse.length(); i++) {
-                        String nomeRota = jsonResponse.getJSONArray(i).getString(2);
-                        LatLng origemLatLng = new LatLng(jsonResponse.getJSONArray(i).getDouble(3), jsonResponse.getJSONArray(i).getDouble(4));
-                        LatLng destinoLatLng = new LatLng(jsonResponse.getJSONArray(i).getDouble(5), jsonResponse.getJSONArray(i).getDouble(6));
+                        String nomeRota = jsonResponse.getJSONArray(i).getString(1);
                         int codRota = jsonResponse.getJSONArray(i).getInt(0);
 
-                        Address origem = conversor.latLngtoAddress2(origemLatLng.latitude, origemLatLng.longitude);
-                        Address destino = conversor.latLngtoAddress2(destinoLatLng.latitude, destinoLatLng.longitude);
-
-
-                        rotaItem.add(new RotaItem(nomeRota, origem.getSubLocality(), destino.getSubLocality(), codRota));
+                        rotaItem.add(new RotaItem(nomeRota,codRota));
                     }
                     list(rotaItem);
                     progressDialog.cancel();

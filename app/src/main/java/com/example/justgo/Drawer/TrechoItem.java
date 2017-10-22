@@ -8,13 +8,11 @@ import com.google.android.gms.maps.model.LatLng;
 
 public class TrechoItem {
     private int codPonto,codRota, nroPonto;
-    private double preco;
-    LatLng origem,destino;
-    private String descricao, meiodeTransporte,tempo;
-    public TrechoItem(int codPonto, int codRota, LatLng origem, LatLng destino, int nroPonto, String descricao, String tempo, double preco, String meiodeTransporte) {
+    private float preco,tempo;
+    String origem,destino;
+    private String descricao, meiodeTransporte;
+    public TrechoItem(int codPonto, String origem, String destino, String descricao, float tempo, float preco, String meiodeTransporte) {
         this.codPonto = codPonto;
-        this.codRota = codRota;
-        this.nroPonto = nroPonto;
         this.origem = origem;
         this.destino = destino;
         this.tempo = tempo;
@@ -32,14 +30,6 @@ public class TrechoItem {
         this.codPonto = codPonto;
     }
 
-    public int getCodRota() {
-        return codRota;
-    }
-
-    public void setCodRota(int codRota) {
-        this.codRota = codRota;
-    }
-
     public int getNroPonto() {
         return nroPonto;
     }
@@ -48,36 +38,20 @@ public class TrechoItem {
         this.nroPonto = nroPonto;
     }
 
-    public LatLng getOrigem() {
+    public String getOrigem() {
         return origem;
     }
 
-    public void setOrigem(LatLng origem) {
+    public void setOrigem(String origem) {
         this.origem = origem;
     }
 
-    public LatLng getDestino() {
+    public String getDestino() {
         return destino;
     }
 
-    public void setDestino(LatLng destino) {
+    public void setDestino(String destino) {
         this.destino = destino;
-    }
-
-    public String getTempo() {
-        return tempo;
-    }
-
-    public void setTempo(String tempo) {
-        this.tempo = tempo;
-    }
-
-    public double getPreco() {
-        return preco;
-    }
-
-    public void setPreco(double preco) {
-        this.preco = preco;
     }
 
     public String getDescricao() {
@@ -96,5 +70,19 @@ public class TrechoItem {
         this.meiodeTransporte = meiodeTransporte;
     }
 
+    public float getPreco() {
+        return preco;
+    }
 
+    public void setPreco(float preco) {
+        this.preco = preco;
+    }
+
+    public float getTempo() {
+        return tempo;
+    }
+
+    public void setTempo(float tempo) {
+        this.tempo = tempo;
+    }
 }

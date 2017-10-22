@@ -67,6 +67,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/listViewPontosMostrarExperiencia"/>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:text="Excluir Rota"
+            android:onClick="excluirRota"/>
+
+
+
 
     </LinearLayout>
 </LinearLayout>

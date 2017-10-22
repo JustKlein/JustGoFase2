@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Camera;
 import android.graphics.Color;
+import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
@@ -24,6 +25,7 @@ import com.example.justgo.CadastroRota.NovaRota;
 import com.example.justgo.MapsHome;
 import com.example.justgo.R;
 import com.example.justgo.Requests.Experiencia.GetPontosHomePageRequest;
+import com.example.justgo.Requests.GetRotaLatLng;
 import com.example.justgo.Requests.HomePageRequest;
 import com.example.justgo.Sobre;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -34,11 +36,14 @@ import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,7 +52,10 @@ public class Navegacao extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, OnMapReadyCallback{
     MapView mapView;
     private GoogleMap mMap;
+    List<Marker> markersOnMap;
     ArrayList pontosDentrodoRaio;
+    ArrayList pontosSolicitados;
+    ArrayList pontosProximosaoSolicitado;
     List<PolylineOptions> polylines;
     private GoogleApiClient googleApiClient;
     ProgressDialog progressDialog;
@@ -73,6 +81,9 @@ public class Navegacao extends AppCompatActivity
 
         //DECLARAÇÕES
         pontosDentrodoRaio = new ArrayList<Integer>();
+        pontosSolicitados = new ArrayList<Integer>();
+        pontosProximosaoSolicitado = new ArrayList<Double>();
+        markersOnMap = new ArrayList<Marker>();
         polylines = new ArrayList<PolylineOptions>();
     }
     @Override
@@ -166,7 +177,16 @@ public class Navegacao extends AppCompatActivity
             if (i != array.size() - 1)
                 pontos = pontos.concat(":");
         }
-        Log.v("aslads", pontos);
+        return pontos;
+    }
+    public String converterArrayDoubletoString(ArrayList<Double> array) {
+        String pontos = "";
+
+        for (int i = 0; i < array.size(); i++) {
+            pontos = pontos.concat(array.get(i).toString());
+            if (i != array.size() - 1)
+                pontos = pontos.concat(":");
+        }
         return pontos;
     }
     public int randomColor() {
@@ -175,7 +195,8 @@ public class Navegacao extends AppCompatActivity
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-      //  progressDialog = ProgressDialog.show(Navegacao.this, "CarregandoPontos", "Aguarde");
+        mMap.clear();
+        progressDialog = ProgressDialog.show(Navegacao.this, "CarregandoPontos", "Aguarde");
         Response.Listener<String> responseListener = new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -199,16 +220,15 @@ public class Navegacao extends AppCompatActivity
                                     JSONArray json = jsonResponse.getJSONArray(i);
                                     System.out.println(json.length());
                                     for (int j = 0; j < json.length(); j++) {
-                                        rectOptions.add(new LatLng(json.getJSONArray(j).getDouble(2), json.getJSONArray(j).getDouble(3))).width(5).color(randomColor()).width(5);
+                                       /* rectOptions.add(new LatLng(json.getJSONArray(j).getDouble(2), json.getJSONArray(j).getDouble(3))).width(5).color(randomColor()).width(5);
                                         rectOptions.add(new LatLng(json.getJSONArray(j).getDouble(2), json.getJSONArray(j).getDouble(3)));
-                                        rectOptions.add(new LatLng(json.getJSONArray(j).getDouble(2), json.getJSONArray(j).getDouble(3)));
+                                        rectOptions.add(new LatLng(json.getJSONArray(j).getDouble(2), json.getJSONArray(j).getDouble(3)));*/
+                                        markersOnMap.add( mMap.addMarker(new MarkerOptions().position(new LatLng(json.getJSONArray(j).getDouble(2),json.getJSONArray(j).getDouble(3)))));
+
 
                                     }
-        //                            progressDialog.cancel();
+                                    progressDialog.cancel();
                                     mMap.addPolyline(rectOptions);
-                                    for(int k =0;k<rectOptions.getPoints().size();k++){
-                                        mMap.addMarker(new MarkerOptions().position(rectOptions.getPoints().get(k)).title("Origem"));
-                                    }
                                 }
 
 
@@ -227,12 +247,86 @@ public class Navegacao extends AppCompatActivity
             }
         };
 
-        HomePageRequest homePageRequest = new HomePageRequest(-19.8986831,  -44.0272054, responseListener);
+        HomePageRequest homePageRequest = new HomePageRequest(-19.8986831, -44.0293941, responseListener);
         RequestQueue queue = Volley.newRequestQueue(Navegacao.this);
         queue.add(homePageRequest);
+mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(-19.8986831, -44.0293941),8));
+    mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+        @Override
+        public boolean onMarkerClick(Marker marker) {
+            pontosProximosaoSolicitado.clear();
+            pontosSolicitados.clear();
+            float results[] = new float[1];
+            for(int i =0;i<markersOnMap.size();i++){
+                Location.distanceBetween(marker.getPosition().latitude,marker.getPosition().longitude,markersOnMap.get(i).getPosition().latitude,markersOnMap.get(i).getPosition().longitude,results);
+                if(results[0]<1000){
+                    pontosProximosaoSolicitado.add(markersOnMap.get(i).getPosition().latitude);
+                    pontosProximosaoSolicitado.add(markersOnMap.get(i).getPosition().longitude);
+                }
+            }
+            Response.Listener<String> responseListener = new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    try {
+                        JSONArray jsonResponse = new JSONArray(response);
+                        Log.v("PONTOS QUE VOLTAM:",jsonResponse.toString());
+                        desenharRotaSolicitada(jsonResponse);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            };
+            GetRotaLatLng getRotaLatLng = new GetRotaLatLng(converterArrayDoubletoString(pontosProximosaoSolicitado), responseListener);
+            RequestQueue queue = Volley.newRequestQueue(Navegacao.this);
+            queue.add(getRotaLatLng);
+            return false;
+        }
+    });
+    }
+    public void desenharRotaSolicitada(JSONArray jsonResponse) throws JSONException {
+        mMap.clear();
+        for (int i = 0; i < jsonResponse.length(); i++) {
+            JSONArray json = jsonResponse.getJSONArray(i);
+            for(int j =0;j<json.length();j++){
+                pontosSolicitados.add(new Integer(json.getJSONArray(j).getInt(0)));
+            }
 
-    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(-19.8986831, -44.0293941),12));
+        }
+        Log.v("OS PONTOS SOLICITADOS:",pontosSolicitados.toString());
+        Response.Listener<String> responseListener = new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    PolylineOptions rectOptions;
+
+                    JSONArray jsonResponse = new JSONArray(response);
+                    for (int i = 0; i < jsonResponse.length(); i++) {
+                        rectOptions = new PolylineOptions();
+                        System.out.println(jsonResponse.getJSONArray(i));
+                        JSONArray json = jsonResponse.getJSONArray(i);
+                        System.out.println(json.length());
+                        for (int j = 0; j < json.length(); j++) {
+                            rectOptions.add(new LatLng(json.getJSONArray(j).getDouble(2), json.getJSONArray(j).getDouble(3))).width(5).color(randomColor()).width(5);
+
+                        }
+                        progressDialog.cancel();
+                        Polyline polyline = mMap.addPolyline(rectOptions);
+                        List<LatLng> teste = polyline.getPoints();
+                        //onMapReady(mMap);
+
+
+
+                    }
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+        GetPontosHomePageRequest getPontoRequest = new GetPontosHomePageRequest(converterArraytoString(pontosSolicitados), responseListener);
+        RequestQueue queue = Volley.newRequestQueue(Navegacao.this);
+        queue.add(getPontoRequest);
 
     }
-
 }

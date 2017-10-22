@@ -19,12 +19,13 @@ import com.android.volley.toolbox.Volley;
 import com.example.justgo.Drawer.Navegacao;
 import com.example.justgo.R;
 import com.example.justgo.Requests.LoginRequest;
+import com.example.justgo.TestedoAutoComplete;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 public class LoginActivity extends AppCompatActivity {
-    public static UsuarioLogado usuarioLogado;
+    UsuarioLogadoSingleton usuarioLogado;
     SharedPreferences sharedPreferences;
     ProgressDialog aguarde;
     @Override
@@ -36,7 +37,7 @@ public class LoginActivity extends AppCompatActivity {
         final EditText senhaEditText = (EditText) findViewById(R.id.senhaLogin);
         final Button bLogin = (Button) findViewById(R.id.botaoEntrarLogin);
         final VerificaçãodeDados verificar = new VerificaçãodeDados();
-        usuarioLogado =  new UsuarioLogado();
+        usuarioLogado =  UsuarioLogadoSingleton.getInstancia();
         sharedPreferences = getPreferences(Context.MODE_PRIVATE);
         bLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,7 +65,7 @@ public class LoginActivity extends AppCompatActivity {
                             String senha = jsonResponse.getString("senhaResposta");
                             Log.v("Email", email);
                             Log.v("Senha", senha);
-                            usuarioLogado.setUsuario(email);
+                            usuarioLogado.setEmail(email);
                             if (email.contentEquals(email) && senha.contentEquals(senha)) {
                                 aguarde.cancel();
                                 SharedPreferences.Editor editor = sharedPreferences.edit();
