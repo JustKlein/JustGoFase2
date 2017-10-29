@@ -1,7 +1,9 @@
  package com.example.justgo.Drawer;
 
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.SeekBar;
 
 import com.example.justgo.R;
 

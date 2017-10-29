@@ -34,7 +34,7 @@ public class MapaMostratExperiencia extends FragmentActivity implements OnMapRea
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_mapa_mostrat_experiencia);
+        setContentView(R.layout.activity_mapa_mostrar_experiencia);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -67,10 +67,13 @@ public class MapaMostratExperiencia extends FragmentActivity implements OnMapRea
                     JSONArray jsonResponse = new JSONArray(response);
                     for(int i=0;i<jsonResponse.length();i++) {
                         LatLng ponto =new LatLng(jsonResponse.getJSONArray(i).getDouble(2), jsonResponse.getJSONArray(i).getDouble(3));
-                        rectOptions.add(ponto);
+                        rectOptions.add(ponto).width(5);
                     }
                     mMap.addPolyline(rectOptions);
                     mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(rectOptions.getPoints().get(0),11 ));
+                    for(int i =0;i<rectOptions.getPoints().size();i++){
+                        mMap.addMarker(new MarkerOptions().position(rectOptions.getPoints().get(i)).title("Origem"));
+                    }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

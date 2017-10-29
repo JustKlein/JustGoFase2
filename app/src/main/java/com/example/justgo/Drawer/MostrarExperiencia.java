@@ -49,11 +49,11 @@ public class MostrarExperiencia extends AppCompatActivity {
         codRota = bundle.getInt("codRota");
         System.out.print("ROTAAA" + codRota);
         tVNomeRota = (TextView) findViewById(R.id.nomeRotaMostrarExperiencia);
-        tVOrigem = (TextView) findViewById(R.id.origemMostrarExeriencia);
+        tVOrigem = (TextView) findViewById(R.id.origemMostrarExperiencia);
         tVDestino = (TextView) findViewById(R.id.destinoMostrarExperiencia);
         //tVTempoGasto = (TextView) findViewById(R.id.tempoGastoMostrarExperiencia);
         //tVValorGasto = (TextView) findViewById(R.id.valorGastoMostrarExeriencia);
-        tVDescricao = (TextView) findViewById(R.id.descricaoMostrarExeriencia);
+        tVDescricao = (TextView) findViewById(R.id.descricaoMostrarExperiencia);
         listViewPontosdaRota = (ListView) findViewById(R.id.listViewPontosMostrarExperiencia);
         conversor = new Conversor(getApplicationContext());
         trechoItem = new ArrayList<TrechoItem>();

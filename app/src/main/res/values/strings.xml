@@ -97,7 +97,9 @@
 
     <string name="para">para</string>
     <string name="title_activity_mapa_mostrat_experiencia">Map</string>
-    <string name="place_details">&lt;b&gt;%1$s&lt;/b&gt;&lt;br/&gt;&lt;i&gt;Place Id: %2$s&lt;/i&gt;&lt;br/&gt;Address: %3$s&lt;br/&gt;Phone: %4$s&lt;br/&gt;Website: %5$s</string>
-
-    </resources>
+    <string name="pesquisa">Pesquisa</string>
+    <string name="textoPesquisa"> Insira a origem ou o destino que deseja pesquisar </string>
+    <string name="verRotaNoMapa">Ver rota no mapa </string>
+    <string name="textoEditarPonto"> Insira abaixo as informações relacionadas ao ponto</string>
+</resources>
 
