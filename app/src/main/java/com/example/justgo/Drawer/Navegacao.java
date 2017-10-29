@@ -282,6 +282,15 @@ mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(-19.8986831, -44.02
             return false;
         }
     });
+        mMap.setOnPolylineClickListener(new GoogleMap.OnPolylineClickListener() {
+            @Override
+            public void onPolylineClick(Polyline polyline) {
+                Intent intent = new Intent(Navegacao.this,MostrarExperiencia.class);
+                intent.putExtra("codRota", Integer.parseInt(polyline.getTag().toString()));
+                startActivity(intent);
+                Log.v("A CARALHO", polyline.getTag().toString());
+            }
+        });
     }
     public void desenharRotaSolicitada(JSONArray jsonResponse) throws JSONException {
         mMap.clear();
@@ -300,6 +309,7 @@ mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(-19.8986831, -44.02
                     PolylineOptions rectOptions;
 
                     JSONArray jsonResponse = new JSONArray(response);
+                    Log.v("JSON",jsonResponse.toString());
                     for (int i = 0; i < jsonResponse.length(); i++) {
                         rectOptions = new PolylineOptions();
                         System.out.println(jsonResponse.getJSONArray(i));
@@ -311,6 +321,9 @@ mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(-19.8986831, -44.02
                         }
                         progressDialog.cancel();
                         Polyline polyline = mMap.addPolyline(rectOptions);
+                        polyline.setTag(jsonResponse.getJSONArray(i).getJSONArray(0).getInt(1));
+                        polyline.setClickable(true);
+                        Log.v("look",polyline.getTag().toString());
                         List<LatLng> teste = polyline.getPoints();
                         //onMapReady(mMap);
 
