@@ -49,8 +49,8 @@
         android:layout_height="230dp" />
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="160dp"
-        android:src="@drawable/viagem"/>
+        android:layout_height="160dp"/>
+        <!--android:src="@drawable/viagem"/>-->
 
 
 
